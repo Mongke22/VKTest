@@ -17,7 +17,8 @@
           <attr name="delimiterSize" format="integer"/>
 
           <attr name="numberColor" format="color"/>
-          <attr name="numberSize" format="integer"/>
+          <attr name="numberSize" format="float"/>
+          <attr name="numberWidth" format="integer"/>
 
           <attr name="circleBackgroundColor" format="color"/>
           <attr name="circleColor" format="color"/>

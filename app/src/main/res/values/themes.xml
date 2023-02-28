@@ -34,8 +34,9 @@
 
         <item name="numberColor">@color/black</item>
         <item name="numberSize">5</item>
+        <item name="numberWidth">5</item>
 
-        <item name="backgroundColor">@color/white</item>
+        <item name="circleBackgroundColor">@color/lightGrey</item>
         <item name="circleColor">@color/black</item>
         <item name="circleSize">10</item>
     </style>

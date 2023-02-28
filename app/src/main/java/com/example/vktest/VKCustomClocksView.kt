@@ -128,7 +128,7 @@ class VKCustomClocksView(
             field = value
             numberPaint.color = value
         }
-    private var numberSize = NOT_INITIALIZED
+    private var numberWidth = NOT_INITIALIZED
         set(value) {
             field = if (value in 1..100) {
                 value
@@ -137,11 +137,16 @@ class VKCustomClocksView(
             }
             numberPaint.strokeWidth = field.toFloat() / HUNDRED_PERCENT * MAX_STROKE_WIDTH
         }
+    private var numberSize = NOT_INITIALIZED_FLOAT
+        set(value) {
+            field = value
+            numberPaint.textSize = value
+        }
     //Настройки круга часов
     private var circleBackgroundColor = NOT_INITIALIZED
         set(value) {
             field = value
-            circlePaint.color = value
+            backGroundCirclePaint.color = value
         }
     private var circleColor = NOT_INITIALIZED
         set(value) {
@@ -186,6 +191,7 @@ class VKCustomClocksView(
     private var delimiterPaint = Paint(Paint.ANTI_ALIAS_FLAG)
     private var numberPaint = Paint(Paint.ANTI_ALIAS_FLAG)
     private var circlePaint = Paint(Paint.ANTI_ALIAS_FLAG)
+    private var backGroundCirclePaint = Paint(Paint.ANTI_ALIAS_FLAG)
 
     init {
 
@@ -243,11 +249,13 @@ class VKCustomClocksView(
             typedArray.getInt(R.styleable.VKCustomClocksView_delimiterSize, DEFAULT_DELIMITER_SIZE)
 
         numberColor = typedArray.getColor(R.styleable.VKCustomClocksView_numberColor, DEFAULT_COLOR)
+        numberWidth =
+            typedArray.getInt(R.styleable.VKCustomClocksView_numberWidth, DEFAULT_NUMBER_SIZE)
         numberSize =
-            typedArray.getInt(R.styleable.VKCustomClocksView_numberSize, DEFAULT_NUMBER_SIZE)
+            typedArray.getFloat(R.styleable.VKCustomClocksView_numberSize, 5f)
 
         circleBackgroundColor =
-            typedArray.getColor(R.styleable.VKCustomClocksView_circleBackgroundColor, DEFAULT_COLOR)
+            typedArray.getColor(R.styleable.VKCustomClocksView_circleBackgroundColor, Color.WHITE)
         circleColor = typedArray.getColor(R.styleable.VKCustomClocksView_circleColor, DEFAULT_COLOR)
         circleSize =
             typedArray.getInt(R.styleable.VKCustomClocksView_circleSize, DEFAULT_CIRCLE_SIZE)
@@ -272,9 +280,9 @@ class VKCustomClocksView(
         delimiterSize = DEFAULT_DELIMITER_SIZE
 
         numberColor = DEFAULT_COLOR
-        numberSize = DEFAULT_NUMBER_SIZE
+        numberWidth = DEFAULT_NUMBER_SIZE
 
-        circleBackgroundColor = DEFAULT_COLOR
+        circleBackgroundColor = Color.WHITE
         circleColor = DEFAULT_COLOR
         circleSize = DEFAULT_CIRCLE_SIZE
     }
@@ -311,6 +319,11 @@ class VKCustomClocksView(
             setShadowLayer(20f, 10f, 10f, circleColor)
         }
 
+        backGroundCirclePaint.apply {
+            color = circleBackgroundColor
+            style = Paint.Style.FILL
+        }
+
          delimiterPaint.apply {
             color = delimiterColor
             style = Paint.Style.STROKE
@@ -322,7 +335,7 @@ class VKCustomClocksView(
             color = numberColor
             textSize = 55f
             style = Paint.Style.STROKE
-            strokeWidth = numberSize.toFloat()
+            strokeWidth = numberWidth.toFloat()
         }
     }
 
@@ -337,6 +350,7 @@ class VKCustomClocksView(
     }
 
     private fun drawMainCircle(canvas: Canvas){
+        canvas.drawCircle(center.x, center.y, radius, backGroundCirclePaint)
         canvas.drawCircle(center.x, center.y, radius, circlePaint)
     }
 
@@ -395,6 +409,8 @@ class VKCustomClocksView(
         center.x = paddingLeft + safeWidth / 2f
         center.y = paddingTop + safeHeight / 2f
 
+        numberSize = radius / 8
+
         delimiterRadius = computeRadiusForExtraCircle(radius, circleSize)
         numberRadius = computeRadiusForExtraCircle(delimiterRadius, 0, 0.8f)
 
@@ -442,7 +458,6 @@ class VKCustomClocksView(
         seconds = timer.seconds
         minutes = timer.minutes
         hours = timer.hours
-        Log.i("Время", "$hours:$minutes:$seconds")
         findPositionsToDraw()
 
         invalidate()
