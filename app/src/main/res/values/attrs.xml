@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-     <declare-styleable name="MyCustomClockVIew">
+     <declare-styleable name="VKCustomClocksView">
           <attr name="secondHandColor" format="color"/>
           <attr name="secondHandWidth" format="integer"/>
           <attr name="secondHandLength" format="integer"/>

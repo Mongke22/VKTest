@@ -13,7 +13,7 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
 
-        <item name="vkCustomClocksStyle">@style/ColoredWatchHands</item>
+        <item name="vkCustomClocksStyle">@style/ColoredClocksHands</item>
     </style>
 
     <style name="DefaultVKClocksStyle">
@@ -40,7 +40,7 @@
         <item name="circleSize">10</item>
     </style>
 
-    <style name="ColoredWatchHands" parent="DefaultVKClocksStyle">
+    <style name="ColoredClocksHands" parent="DefaultVKClocksStyle">
         <item name="secondHandColor">@color/red</item>
         <item name="minuteHandColor">@color/lightBlue</item>
         <item name="hourHandColor">@color/green</item>
