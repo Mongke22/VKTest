@@ -13,4 +13,30 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="DefaultVKClocksStyle">
+        <item name="secondHandColor">@color/black</item>
+        <item name="secondHandWidth">10</item>
+        <item name="secondHandLength">80</item>
+
+        <item name="minuteHandColor">@color/black</item>
+        <item name="minuteHandWidth">20</item>
+        <item name="minuteHandLength">40</item>
+
+        <item name="hourHandColor">@color/black</item>
+        <item name="hourHandWidth">40</item>
+        <item name="hourHandLength">20</item>
+
+        <item name="delimiterColor">@color/black</item>
+        <item name="delimiterSize">10</item>
+
+        <item name="numberColor">@color/black</item>
+        <item name="numberSize">20</item>
+
+        <item name="backgroundColor">@color/white</item>
+        <item name="circleColor">@color/black</item>
+        <item name="circleSize">10</item>
+
+    </style>
+
 </resources>
