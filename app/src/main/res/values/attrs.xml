@@ -19,7 +19,7 @@
           <attr name="numberColor" format="color"/>
           <attr name="numberSize" format="integer"/>
 
-          <attr name="backgroundColor" format="color"/>
+          <attr name="circleBackgroundColor" format="color"/>
           <attr name="circleColor" format="color"/>
           <attr name="circleSize" format="integer"/>
      </declare-styleable>
