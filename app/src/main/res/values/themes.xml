@@ -22,7 +22,7 @@
         <item name="secondHandLength">80</item>
 
         <item name="minuteHandColor">@color/black</item>
-        <item name="minuteHandWidth">20</item>
+        <item name="minuteHandWidth">30</item>
         <item name="minuteHandLength">40</item>
 
         <item name="hourHandColor">@color/black</item>
@@ -30,15 +30,15 @@
         <item name="hourHandLength">20</item>
 
         <item name="delimiterColor">@color/black</item>
-        <item name="delimiterSize">10</item>
+        <item name="delimiterSize">20</item>
 
         <item name="numberColor">@color/black</item>
-        <item name="numberSize">5</item>
-        <item name="numberWidth">5</item>
+        <item name="numberSize">70</item>
+        <item name="numberWidth">30</item>
 
         <item name="circleBackgroundColor">@color/lightGrey</item>
         <item name="circleColor">@color/black</item>
-        <item name="circleSize">10</item>
+        <item name="circleSize">12</item>
     </style>
 
     <style name="ColoredClocksHands" parent="DefaultVKClocksStyle">

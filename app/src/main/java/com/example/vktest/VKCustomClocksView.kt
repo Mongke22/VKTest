@@ -5,8 +5,9 @@ import android.graphics.*
 import android.os.Handler
 import android.os.Looper
 import android.util.AttributeSet
-import android.util.Log
 import android.view.View
+import java.lang.Math.max
+import java.lang.Math.min
 import kotlin.concurrent.thread
 import kotlin.math.cos
 import kotlin.math.sin
@@ -39,128 +40,153 @@ class VKCustomClocksView(
     private var hours = NOT_INITIALIZED
 
     //Настройки секундной стрелки
-    private var secondHandColor = NOT_INITIALIZED
+     var secondHandColor = NOT_INITIALIZED
         set(value) {
             field = value
             secondHandPaint.color = value
+            secondHandPaint.setShadowLayer(secondHandWidth.toFloat(), 5f, 5f, value)
+            invalidate()
         }
-    private var secondHandWidth = NOT_INITIALIZED
+    var secondHandWidth = NOT_INITIALIZED
         set(value) {
             field = if (value in 1..100) {
                 value
             } else {
-                1
+                min(max(value, 1), 100)
             }
             secondHandPaint.strokeWidth = field.toFloat() / HUNDRED_PERCENT * MAX_STROKE_WIDTH
+            invalidate()
         }
-    private var secondHandLength = NOT_INITIALIZED
+     var secondHandLength = NOT_INITIALIZED
         set(value) {
             field = if (value in 1..100) {
                 value
             } else {
-                1
+                min(max(value, 1), 100)
             }
+            invalidate()
         }
     //Настройки минутной стрелки
-    private var minuteHandColor = NOT_INITIALIZED
+     var minuteHandColor = NOT_INITIALIZED
         set(value) {
             field = value
             minuteHandPaint.color = value
+            minuteHandPaint.setShadowLayer(minuteHandWidth.toFloat(), 5f, 5f, value)
+            invalidate()
         }
-    private var minuteHandWidth = NOT_INITIALIZED
+     var minuteHandWidth = NOT_INITIALIZED
         set(value) {
             field = if (value in 1..100) {
                 value
             } else {
-                1
+                min(max(value, 1), 100)
             }
             minuteHandPaint.strokeWidth = field.toFloat() / HUNDRED_PERCENT * MAX_STROKE_WIDTH
+            invalidate()
         }
-    private var minuteHandLength = NOT_INITIALIZED
+     var minuteHandLength = NOT_INITIALIZED
         set(value) {
             field = if (value in 1..100) {
                 value
             } else {
-                1
+                min(max(value, 1), 100)
             }
+            invalidate()
         }
     //Настройки стрелки часов
-    private var hourHandColor = NOT_INITIALIZED
+     var hourHandColor = NOT_INITIALIZED
         set(value) {
             field = value
             hourHandPaint.color = value
+            hourHandPaint.setShadowLayer(hourHandWidth.toFloat(), 5f, 5f, value)
+            invalidate()
         }
-    private var hourHandWidth = NOT_INITIALIZED
+     var hourHandWidth = NOT_INITIALIZED
         set(value) {
             field = if (value in 1..100) {
                 value
             } else {
-                1
+                min(max(value, 1), 100)
             }
             hourHandPaint.strokeWidth = field.toFloat() / HUNDRED_PERCENT * MAX_STROKE_WIDTH
+            invalidate()
         }
-    private var hourHandLength = NOT_INITIALIZED
+     var hourHandLength = NOT_INITIALIZED
         set(value) {
             field = if (value in 1..100) {
                 value
             } else {
-                1
+                min(max(value, 1), 100)
             }
+            invalidate()
         }
     //Настройки делений
-    private var delimiterColor = NOT_INITIALIZED
+     var delimiterColor = NOT_INITIALIZED
         set(value) {
             field = value
             delimiterPaint.color = value
+            invalidate()
         }
-    private var delimiterSize = NOT_INITIALIZED
+     var delimiterWidth = NOT_INITIALIZED
         set(value) {
             field = if (value in 1..100) {
                 value
             } else {
-                1
+                min(max(value, 1), 100)
             }
             delimiterPaint.strokeWidth = field.toFloat() / HUNDRED_PERCENT * MAX_STROKE_WIDTH
+            invalidate()
         }
     //Настройки циферблата
-    private var numberColor = NOT_INITIALIZED
+     var numberColor = NOT_INITIALIZED
         set(value) {
             field = value
             numberPaint.color = value
+            invalidate()
         }
-    private var numberWidth = NOT_INITIALIZED
+     var numberWidth = NOT_INITIALIZED
         set(value) {
             field = if (value in 1..100) {
                 value
             } else {
-                1
+                min(max(value, 1), 100)
             }
             numberPaint.strokeWidth = field.toFloat() / HUNDRED_PERCENT * MAX_STROKE_WIDTH
+            invalidate()
         }
-    private var numberSize = NOT_INITIALIZED_FLOAT
+     var numberSize = NOT_INITIALIZED
         set(value) {
-            field = value
-            numberPaint.textSize = value
+            field = if (value in 1..100) {
+                value
+            } else {
+                min(max(value, 1), 100)
+            }
+            numberPaint.textSize =  field.toFloat() / HUNDRED_PERCENT * MAX_NUMBER_SIZE
+            invalidate()
         }
     //Настройки круга часов
-    private var circleBackgroundColor = NOT_INITIALIZED
+     var circleBackgroundColor = NOT_INITIALIZED
         set(value) {
             field = value
             backGroundCirclePaint.color = value
+            invalidate()
         }
-    private var circleColor = NOT_INITIALIZED
+     var circleColor = NOT_INITIALIZED
         set(value) {
             field = value
             circlePaint.color = value
+            circlePaint.setShadowLayer(circleWidth.toFloat(), 5f, 5f, value)
+            invalidate()
         }
-    private var circleSize = NOT_INITIALIZED
+     var circleWidth = NOT_INITIALIZED
         set(value) {
             field = if (value in 1..100) {
                 value
             } else {
-                1
+                min(max(value, 1), 100)
             }
             circlePaint.strokeWidth = field.toFloat() / HUNDRED_PERCENT * MAX_STROKE_WIDTH
+            invalidate()
         }
 
     private var center = PointF(NOT_INITIALIZED_FLOAT, NOT_INITIALIZED_FLOAT)
@@ -245,19 +271,19 @@ class VKCustomClocksView(
 
         delimiterColor =
             typedArray.getColor(R.styleable.VKCustomClocksView_delimiterColor, DEFAULT_COLOR)
-        delimiterSize =
+        delimiterWidth =
             typedArray.getInt(R.styleable.VKCustomClocksView_delimiterSize, DEFAULT_DELIMITER_SIZE)
 
         numberColor = typedArray.getColor(R.styleable.VKCustomClocksView_numberColor, DEFAULT_COLOR)
         numberWidth =
             typedArray.getInt(R.styleable.VKCustomClocksView_numberWidth, DEFAULT_NUMBER_SIZE)
         numberSize =
-            typedArray.getFloat(R.styleable.VKCustomClocksView_numberSize, 5f)
+            typedArray.getInt(R.styleable.VKCustomClocksView_numberSize, 80)
 
         circleBackgroundColor =
             typedArray.getColor(R.styleable.VKCustomClocksView_circleBackgroundColor, Color.WHITE)
         circleColor = typedArray.getColor(R.styleable.VKCustomClocksView_circleColor, DEFAULT_COLOR)
-        circleSize =
+        circleWidth =
             typedArray.getInt(R.styleable.VKCustomClocksView_circleSize, DEFAULT_CIRCLE_SIZE)
 
         typedArray.recycle()
@@ -277,14 +303,14 @@ class VKCustomClocksView(
         hourHandLength = DEFAULT_HOUR_HAND_LENGTH
 
         delimiterColor = DEFAULT_COLOR
-        delimiterSize = DEFAULT_DELIMITER_SIZE
+        delimiterWidth = DEFAULT_DELIMITER_SIZE
 
         numberColor = DEFAULT_COLOR
         numberWidth = DEFAULT_NUMBER_SIZE
 
         circleBackgroundColor = Color.WHITE
         circleColor = DEFAULT_COLOR
-        circleSize = DEFAULT_CIRCLE_SIZE
+        circleWidth = DEFAULT_CIRCLE_SIZE
     }
 
     private fun initPaints() {
@@ -315,8 +341,8 @@ class VKCustomClocksView(
         circlePaint.apply {
             color = circleColor
             style = Paint.Style.STROKE
-            strokeWidth = circleSize.toFloat()
-            setShadowLayer(20f, 10f, 10f, circleColor)
+            strokeWidth = circleWidth.toFloat()
+            setShadowLayer(circleWidth.toFloat(), 10f, 10f, circleColor)
         }
 
         backGroundCirclePaint.apply {
@@ -328,12 +354,12 @@ class VKCustomClocksView(
             color = delimiterColor
             style = Paint.Style.STROKE
             strokeCap = Paint.Cap.ROUND
-            strokeWidth = delimiterSize.toFloat()
+            strokeWidth = delimiterWidth.toFloat()
         }
 
         numberPaint.apply {
             color = numberColor
-            textSize = 55f
+            textSize = numberSize / HUNDRED_PERCENT * MAX_NUMBER_SIZE
             style = Paint.Style.STROKE
             strokeWidth = numberWidth.toFloat()
         }
@@ -341,7 +367,10 @@ class VKCustomClocksView(
 
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
-        drawMainCircle(canvas!!)
+        if(canvas == null){
+            throw Exception("Canvas in sull")
+        }
+        drawMainCircle(canvas)
         drawDelimiters(canvas)
         drawNumber(canvas)
         drawHand(canvas, secondHandPoints, secondHandPaint)
@@ -409,13 +438,26 @@ class VKCustomClocksView(
         center.x = paddingLeft + safeWidth / 2f
         center.y = paddingTop + safeHeight / 2f
 
-        numberSize = radius / 8
-
-        delimiterRadius = computeRadiusForExtraCircle(radius, circleSize)
+        delimiterRadius = computeRadiusForExtraCircle(radius, circleWidth)
         numberRadius = computeRadiusForExtraCircle(delimiterRadius, 0, 0.8f)
+
+        resetValues()
 
         timeDelimitersCoordinates = computeExtraCirclePointsByRadius(60, delimiterRadius)
         numberCoordinates = computeExtraCirclePointsByRadius(12, numberRadius)
+    }
+
+    private fun resetValues(){
+        MAX_STROKE_WIDTH = (radius / 10).toInt()
+        MAX_NUMBER_SIZE = radius / 3
+
+        secondHandWidth = secondHandWidth
+        minuteHandWidth = minuteHandWidth
+        hourHandWidth = hourHandWidth
+        numberWidth = numberWidth
+        numberSize = numberSize
+        delimiterWidth = delimiterWidth
+
     }
 
     private fun computeExtraCirclePointsByRadius(
@@ -494,6 +536,8 @@ class VKCustomClocksView(
     }
 
     companion object {
+        private var MAX_STROKE_WIDTH = 50
+        private var MAX_NUMBER_SIZE = 50f
 
         private const val NOT_INITIALIZED = -1
         private const val NOT_INITIALIZED_FLOAT = 0f
@@ -516,8 +560,6 @@ class VKCustomClocksView(
         private const val DEGREES_PER_SECOND = 6f
         private const val DEGREES_PER_MINUTE = 6f
         private const val DEGREES_PER_HOUR = 30f
-
-        private const val MAX_STROKE_WIDTH = 50
 
         private const val STANDARD_ANGEL_TO_ZERO = 90.0
 
