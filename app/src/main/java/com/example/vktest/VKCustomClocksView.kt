@@ -4,6 +4,8 @@ import android.content.Context
 import android.graphics.*
 import android.os.Handler
 import android.os.Looper
+import android.os.Parcel
+import android.os.Parcelable
 import android.util.AttributeSet
 import android.view.View
 import java.lang.Math.max
@@ -40,7 +42,7 @@ class VKCustomClocksView(
     private var hours = NOT_INITIALIZED
 
     //Настройки секундной стрелки
-     var secondHandColor = NOT_INITIALIZED
+    var secondHandColor = NOT_INITIALIZED
         set(value) {
             field = value
             secondHandPaint.color = value
@@ -57,7 +59,7 @@ class VKCustomClocksView(
             secondHandPaint.strokeWidth = field.toFloat() / HUNDRED_PERCENT * MAX_STROKE_WIDTH
             invalidate()
         }
-     var secondHandLength = NOT_INITIALIZED
+    var secondHandLength = NOT_INITIALIZED
         set(value) {
             field = if (value in 1..100) {
                 value
@@ -67,14 +69,14 @@ class VKCustomClocksView(
             invalidate()
         }
     //Настройки минутной стрелки
-     var minuteHandColor = NOT_INITIALIZED
+    var minuteHandColor = NOT_INITIALIZED
         set(value) {
             field = value
             minuteHandPaint.color = value
             minuteHandPaint.setShadowLayer(minuteHandWidth.toFloat(), 5f, 5f, value)
             invalidate()
         }
-     var minuteHandWidth = NOT_INITIALIZED
+    var minuteHandWidth = NOT_INITIALIZED
         set(value) {
             field = if (value in 1..100) {
                 value
@@ -84,7 +86,7 @@ class VKCustomClocksView(
             minuteHandPaint.strokeWidth = field.toFloat() / HUNDRED_PERCENT * MAX_STROKE_WIDTH
             invalidate()
         }
-     var minuteHandLength = NOT_INITIALIZED
+    var minuteHandLength = NOT_INITIALIZED
         set(value) {
             field = if (value in 1..100) {
                 value
@@ -94,14 +96,14 @@ class VKCustomClocksView(
             invalidate()
         }
     //Настройки стрелки часов
-     var hourHandColor = NOT_INITIALIZED
+    var hourHandColor = NOT_INITIALIZED
         set(value) {
             field = value
             hourHandPaint.color = value
             hourHandPaint.setShadowLayer(hourHandWidth.toFloat(), 5f, 5f, value)
             invalidate()
         }
-     var hourHandWidth = NOT_INITIALIZED
+    var hourHandWidth = NOT_INITIALIZED
         set(value) {
             field = if (value in 1..100) {
                 value
@@ -111,7 +113,7 @@ class VKCustomClocksView(
             hourHandPaint.strokeWidth = field.toFloat() / HUNDRED_PERCENT * MAX_STROKE_WIDTH
             invalidate()
         }
-     var hourHandLength = NOT_INITIALIZED
+    var hourHandLength = NOT_INITIALIZED
         set(value) {
             field = if (value in 1..100) {
                 value
@@ -121,13 +123,13 @@ class VKCustomClocksView(
             invalidate()
         }
     //Настройки делений
-     var delimiterColor = NOT_INITIALIZED
+    var delimiterColor = NOT_INITIALIZED
         set(value) {
             field = value
             delimiterPaint.color = value
             invalidate()
         }
-     var delimiterWidth = NOT_INITIALIZED
+    var delimiterWidth = NOT_INITIALIZED
         set(value) {
             field = if (value in 1..100) {
                 value
@@ -138,13 +140,13 @@ class VKCustomClocksView(
             invalidate()
         }
     //Настройки циферблата
-     var numberColor = NOT_INITIALIZED
+    var numberColor = NOT_INITIALIZED
         set(value) {
             field = value
             numberPaint.color = value
             invalidate()
         }
-     var numberWidth = NOT_INITIALIZED
+    var numberWidth = NOT_INITIALIZED
         set(value) {
             field = if (value in 1..100) {
                 value
@@ -154,7 +156,7 @@ class VKCustomClocksView(
             numberPaint.strokeWidth = field.toFloat() / HUNDRED_PERCENT * MAX_STROKE_WIDTH
             invalidate()
         }
-     var numberSize = NOT_INITIALIZED
+    var numberSize = NOT_INITIALIZED
         set(value) {
             field = if (value in 1..100) {
                 value
@@ -165,20 +167,20 @@ class VKCustomClocksView(
             invalidate()
         }
     //Настройки круга часов
-     var circleBackgroundColor = NOT_INITIALIZED
+    var circleBackgroundColor = NOT_INITIALIZED
         set(value) {
             field = value
             backGroundCirclePaint.color = value
             invalidate()
         }
-     var circleColor = NOT_INITIALIZED
+    var circleColor = NOT_INITIALIZED
         set(value) {
             field = value
             circlePaint.color = value
             circlePaint.setShadowLayer(circleWidth.toFloat(), 5f, 5f, value)
             invalidate()
         }
-     var circleWidth = NOT_INITIALIZED
+    var circleWidth = NOT_INITIALIZED
         set(value) {
             field = if (value in 1..100) {
                 value
@@ -533,6 +535,130 @@ class VKCustomClocksView(
 
     private fun findSin(angel: Float): Float {
         return sin(Math.toRadians(angel - STANDARD_ANGEL_TO_ZERO)).toFloat()
+    }
+
+    override fun onSaveInstanceState(): Parcelable? {
+        val superState = super.onSaveInstanceState()!!
+        val savedState = SavedState(superState)
+        savedState.secondHandColor = secondHandColor
+        savedState.secondHandWidth = secondHandWidth
+        savedState.secondHandLength = secondHandLength
+        savedState.minuteHandColor = minuteHandColor
+        savedState.minuteHandWidth = minuteHandWidth
+        savedState.minuteHandLength = minuteHandLength
+        savedState.hourHandColor = hourHandColor
+        savedState.hourHandWidth = hourHandWidth
+        savedState.hourHandLength = hourHandLength
+        savedState.delimiterColor = delimiterColor
+        savedState.delimiterWidth = delimiterWidth
+        savedState.numberColor = numberColor
+        savedState.numberWidth = numberWidth
+        savedState.numberSize = numberSize
+        savedState.circleBackgroundColor = circleBackgroundColor
+        savedState.circleColor = circleColor
+        savedState.circleWidth = circleWidth
+        return savedState
+    }
+
+    override fun onRestoreInstanceState(state: Parcelable?) {
+        val savedState = state as SavedState
+        super.onRestoreInstanceState(savedState.superState)
+       secondHandColor = savedState.secondHandColor
+       secondHandWidth = savedState.secondHandWidth
+       secondHandLength = savedState.secondHandLength
+       minuteHandColor = savedState.minuteHandColor
+       minuteHandWidth = savedState.minuteHandWidth
+       minuteHandLength = savedState.minuteHandLength
+       hourHandColor = savedState.hourHandColor
+       hourHandWidth = savedState.hourHandWidth
+       hourHandLength = savedState.hourHandLength
+       delimiterColor = savedState.delimiterColor
+       delimiterWidth = savedState.delimiterWidth
+       numberColor = savedState.numberColor
+       numberWidth = savedState.numberWidth
+       numberSize = savedState.numberSize
+       circleBackgroundColor = savedState.circleBackgroundColor
+       circleColor = savedState.circleColor
+       circleWidth = savedState.circleWidth
+    }
+
+    class SavedState: BaseSavedState{
+        var secondHandColor: Int = NOT_INITIALIZED
+        var secondHandWidth: Int = NOT_INITIALIZED
+        var secondHandLength: Int = NOT_INITIALIZED
+        var minuteHandColor: Int = NOT_INITIALIZED
+        var minuteHandWidth: Int = NOT_INITIALIZED
+        var minuteHandLength: Int = NOT_INITIALIZED
+        var hourHandColor: Int = NOT_INITIALIZED
+        var hourHandWidth: Int = NOT_INITIALIZED
+        var hourHandLength: Int = NOT_INITIALIZED
+        var delimiterColor: Int = NOT_INITIALIZED
+        var delimiterWidth: Int = NOT_INITIALIZED
+        var numberColor: Int = NOT_INITIALIZED
+        var numberWidth: Int = NOT_INITIALIZED
+        var numberSize: Int = NOT_INITIALIZED
+        var circleBackgroundColor: Int = NOT_INITIALIZED
+        var circleColor: Int = NOT_INITIALIZED
+        var circleWidth: Int = NOT_INITIALIZED
+        constructor(superState: Parcelable): super(superState)
+        constructor(parcel: Parcel): super(parcel){
+            secondHandColor = parcel.readInt()
+            secondHandWidth = parcel.readInt()
+            secondHandLength = parcel.readInt()
+            minuteHandColor = parcel.readInt()
+            minuteHandWidth = parcel.readInt()
+            minuteHandLength = parcel.readInt()
+            hourHandColor = parcel.readInt()
+            hourHandWidth = parcel.readInt()
+            hourHandLength = parcel.readInt()
+            delimiterColor = parcel.readInt()
+            delimiterWidth = parcel.readInt()
+            numberColor = parcel.readInt()
+            numberWidth = parcel.readInt()
+            numberSize = parcel.readInt()
+            circleBackgroundColor = parcel.readInt()
+            circleColor = parcel.readInt()
+            circleWidth = parcel.readInt()
+        }
+
+        override fun writeToParcel(out: Parcel, flags: Int) {
+            super.writeToParcel(out, flags)
+            out.apply {
+                writeInt(secondHandColor)
+                writeInt(secondHandWidth)
+                writeInt(secondHandLength)
+                writeInt(minuteHandColor)
+                writeInt(minuteHandWidth)
+                writeInt(minuteHandLength)
+                writeInt(hourHandColor)
+                writeInt(hourHandWidth)
+                writeInt(hourHandLength)
+                writeInt(delimiterColor)
+                writeInt(delimiterWidth)
+                writeInt(numberColor)
+                writeInt(numberWidth)
+                writeInt(numberSize)
+                writeInt(circleBackgroundColor)
+                writeInt(circleColor)
+                writeInt(circleWidth)
+            }
+
+        }
+
+        companion object{
+            @JvmField
+            val CREATOR: Parcelable.Creator<SavedState> = object : Parcelable.Creator<SavedState>{
+                override fun createFromParcel(source: Parcel): SavedState {
+                    return SavedState(source)
+                }
+
+                override fun newArray(size: Int): Array<SavedState?> {
+                    return Array(size){null}
+                }
+
+            }
+        }
+
     }
 
     companion object {
