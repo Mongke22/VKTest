@@ -519,14 +519,14 @@ class VKCustomClocksView(
 
     private fun findHandPoints(
         time: Int,
-        degrees: Float,
+        degreesPerSter: Float,
         length: Int,
         points: Pair<PointF, PointF>
     ) {
-        val startCosAngle = findCos(time * degrees + HALF_CIRCLE_DEGREES)
-        val startSinAngle = findSin(time * degrees + HALF_CIRCLE_DEGREES)
-        val finishCosAngle = findCos(time * degrees)
-        val finishSinAngle = findSin(time * degrees)
+        val startCosAngle = findCos(time * degreesPerSter + HALF_CIRCLE_DEGREES)
+        val startSinAngle = findSin(time * degreesPerSter + HALF_CIRCLE_DEGREES)
+        val finishCosAngle = findCos(time * degreesPerSter)
+        val finishSinAngle = findSin(time * degreesPerSter)
         points.first.x = center.x + (0.1f * radius) * startCosAngle
         points.first.y = center.y + (0.1f * radius) * startSinAngle
         points.second.x = center.x + (length / HUNDRED_PERCENT * radius) * finishCosAngle
