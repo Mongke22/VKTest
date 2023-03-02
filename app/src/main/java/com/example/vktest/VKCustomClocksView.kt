@@ -46,7 +46,7 @@ class VKCustomClocksView(
         set(value) {
             field = value
             secondHandPaint.color = value
-            secondHandPaint.setShadowLayer(secondHandWidth.toFloat(), 5f, 5f, value)
+            secondHandPaint.setShadowLayer(secondHandWidth.toFloat(), HAND_SHADOW_PADDING, HAND_SHADOW_PADDING, value)
             invalidate()
         }
     var secondHandWidth = NOT_INITIALIZED
@@ -74,7 +74,7 @@ class VKCustomClocksView(
         set(value) {
             field = value
             minuteHandPaint.color = value
-            minuteHandPaint.setShadowLayer(minuteHandWidth.toFloat(), 5f, 5f, value)
+            minuteHandPaint.setShadowLayer(minuteHandWidth.toFloat(), HAND_SHADOW_PADDING, HAND_SHADOW_PADDING, value)
             invalidate()
         }
     var minuteHandWidth = NOT_INITIALIZED
@@ -102,7 +102,7 @@ class VKCustomClocksView(
         set(value) {
             field = value
             hourHandPaint.color = value
-            hourHandPaint.setShadowLayer(hourHandWidth.toFloat(), 5f, 5f, value)
+            hourHandPaint.setShadowLayer(hourHandWidth.toFloat(), HAND_SHADOW_PADDING, HAND_SHADOW_PADDING, value)
             invalidate()
         }
     var hourHandWidth = NOT_INITIALIZED
@@ -180,7 +180,7 @@ class VKCustomClocksView(
         set(value) {
             field = value
             circlePaint.color = value
-            circlePaint.setShadowLayer(circleWidth.toFloat(), 5f, 5f, value)
+            circlePaint.setShadowLayer(circleWidth.toFloat(), CIRCLE_SHADOW_PADDING, CIRCLE_SHADOW_PADDING, value)
             invalidate()
         }
     var circleWidth = NOT_INITIALIZED
@@ -281,9 +281,9 @@ class VKCustomClocksView(
 
         numberColor = typedArray.getColor(R.styleable.VKCustomClocksView_numberColor, DEFAULT_COLOR)
         numberWidth =
-            typedArray.getInt(R.styleable.VKCustomClocksView_numberWidth, DEFAULT_NUMBER_SIZE)
+            typedArray.getInt(R.styleable.VKCustomClocksView_numberWidth, DEFAULT_NUMBER_WIDTH)
         numberSize =
-            typedArray.getInt(R.styleable.VKCustomClocksView_numberSize, 80)
+            typedArray.getInt(R.styleable.VKCustomClocksView_numberSize, DEFAULT_NUMBER_SIZE)
 
         circleBackgroundColor =
             typedArray.getColor(R.styleable.VKCustomClocksView_circleBackgroundColor, Color.WHITE)
@@ -324,7 +324,7 @@ class VKCustomClocksView(
             style = Paint.Style.STROKE
             strokeCap = Paint.Cap.ROUND
             strokeWidth = secondHandWidth / HUNDRED_PERCENT * MAX_STROKE_WIDTH
-            setShadowLayer(secondHandWidth.toFloat(), 5f, 5f, secondHandColor)
+            setShadowLayer(secondHandWidth.toFloat(), HAND_SHADOW_PADDING, HAND_SHADOW_PADDING, secondHandColor)
         }
 
         minuteHandPaint.apply {
@@ -332,14 +332,14 @@ class VKCustomClocksView(
             style = Paint.Style.STROKE
             strokeCap = Paint.Cap.ROUND
             strokeWidth = minuteHandWidth / HUNDRED_PERCENT * MAX_STROKE_WIDTH
-            setShadowLayer(minuteHandWidth.toFloat(), 5f, 5f, minuteHandColor)
+            setShadowLayer(minuteHandWidth.toFloat(), HAND_SHADOW_PADDING, HAND_SHADOW_PADDING, minuteHandColor)
         }
 
         hourHandPaint.apply {
             color = hourHandColor
             style = Paint.Style.STROKE
             strokeWidth = hourHandWidth / HUNDRED_PERCENT * MAX_STROKE_WIDTH
-            setShadowLayer(hourHandWidth.toFloat(), 5f, 5f, hourHandColor)
+            setShadowLayer(hourHandWidth.toFloat(), HAND_SHADOW_PADDING, HAND_SHADOW_PADDING, hourHandColor)
             strokeCap = Paint.Cap.ROUND
         }
 
@@ -347,7 +347,7 @@ class VKCustomClocksView(
             color = circleColor
             style = Paint.Style.STROKE
             strokeWidth = circleWidth.toFloat()
-            setShadowLayer(circleWidth.toFloat(), 10f, 10f, circleColor)
+            setShadowLayer(circleWidth.toFloat(), CIRCLE_SHADOW_PADDING, CIRCLE_SHADOW_PADDING, circleColor)
         }
 
         backGroundCirclePaint.apply {
@@ -407,7 +407,7 @@ class VKCustomClocksView(
         var hours = 12
         var numberRect = Rect()
         for (point in numberCoordinates) {
-            numberPaint.getTextBounds(hours.toString(), 0, hours.toString().length, numberRect)
+            numberPaint.getTextBounds(hours.toString(), FIRST_INDEX, hours.toString().length, numberRect)
             canvas.drawText(
                 hours.toString(),
                 point.x - (numberRect.width() / 2),
@@ -444,7 +444,7 @@ class VKCustomClocksView(
         center.y = paddingTop + safeHeight / 2f
 
         delimiterRadius = computeRadiusForExtraCircle(radius, circleWidth)
-        numberRadius = computeRadiusForExtraCircle(delimiterRadius, 0, 0.8f)
+        numberRadius = computeRadiusForExtraCircle(delimiterRadius, 0, PADDING_FROM_DELIMITER_RADIUS)
 
         resetValues()
         findPositionsToDraw()
@@ -454,8 +454,8 @@ class VKCustomClocksView(
     }
 
     private fun resetValues(){
-        MAX_STROKE_WIDTH = (radius / 10).toInt()
-        MAX_NUMBER_SIZE = radius / 3
+        MAX_STROKE_WIDTH = (radius / MAX_STROKE_WIDTH_DELIMITER).toInt()
+        MAX_NUMBER_SIZE = radius / MAX_NUMBER_SIZE_DELIMITER
 
         secondHandWidth = secondHandWidth
         minuteHandWidth = minuteHandWidth
@@ -470,7 +470,7 @@ class VKCustomClocksView(
         countOfIndicator: Int,
         byRadius: Float
     ): ArrayList<PointF> {
-        val angle = 360f / countOfIndicator
+        val angle = CIRCLE_DEGREES_FLOAT / countOfIndicator
         val result = ArrayList<PointF>()
         for (indicator in 0 until countOfIndicator) {
             val point = PointF()
@@ -523,8 +523,8 @@ class VKCustomClocksView(
         length: Int,
         points: Pair<PointF, PointF>
     ) {
-        val startCosAngle = findCos(time * degrees + 180)
-        val startSinAngle = findSin(time * degrees + 180)
+        val startCosAngle = findCos(time * degrees + HALF_CIRCLE_DEGREES)
+        val startSinAngle = findSin(time * degrees + HALF_CIRCLE_DEGREES)
         val finishCosAngle = findCos(time * degrees)
         val finishSinAngle = findSin(time * degrees)
         points.first.x = center.x + (0.1f * radius) * startCosAngle
@@ -672,6 +672,8 @@ class VKCustomClocksView(
         private const val NOT_INITIALIZED = -1
         private const val NOT_INITIALIZED_FLOAT = 0f
 
+        private const val FIRST_INDEX = 0
+
         private const val DEFAULT_COLOR = Color.BLACK
 
         private const val DEFAULT_SECOND_HAND_WIDTH = 10
@@ -684,18 +686,27 @@ class VKCustomClocksView(
         private const val DEFAULT_HOUR_HAND_LENGTH = 20
 
         private const val DEFAULT_DELIMITER_SIZE = 5
-        private const val DEFAULT_NUMBER_SIZE = 5
+        private const val DEFAULT_NUMBER_WIDTH = 5
+        private const val DEFAULT_NUMBER_SIZE = 80
         private const val DEFAULT_CIRCLE_SIZE = 10
 
         private const val DEGREES_PER_SECOND = 6f
         private const val DEGREES_PER_MINUTE = 6f
         private const val DEGREES_PER_HOUR = 30f
 
+        private const val HAND_SHADOW_PADDING = 5f
+        private const val CIRCLE_SHADOW_PADDING = 10f
+
         private const val STANDARD_ANGEL_TO_ZERO = 90.0
 
         private const val PADDING_FROM_MAX_RADIUS = 0.9f
+        private const val PADDING_FROM_DELIMITER_RADIUS = 0.8f
+        private const val MAX_STROKE_WIDTH_DELIMITER = 10
+        private const val MAX_NUMBER_SIZE_DELIMITER = 3
 
         private const val HUNDRED_PERCENT = 100f
+        private const val CIRCLE_DEGREES_FLOAT = 360f
+        private const val HALF_CIRCLE_DEGREES = 180
     }
 
 }
