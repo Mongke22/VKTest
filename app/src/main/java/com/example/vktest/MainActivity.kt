@@ -1,12 +1,15 @@
 package com.example.vktest
 
+import android.content.res.Resources.getSystem
 import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.SeekBar
+import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.vktest.databinding.ActivityMainBinding
 import com.jaredrummler.android.colorpicker.ColorPickerDialog
 import com.jaredrummler.android.colorpicker.ColorPickerDialogListener
+
 
 class MainActivity : AppCompatActivity(), ColorPickerDialogListener {
 
@@ -95,6 +98,21 @@ class MainActivity : AppCompatActivity(), ColorPickerDialogListener {
         binding.circleWidthChanger.setOnSeekBarChangeListener(object: SeekBar.OnSeekBarChangeListener{
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                 binding.vkTestClocks.circleWidth = progress
+            }
+
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {
+            }
+
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {
+            }
+
+        })
+        binding.clocksSizeChanger.setOnSeekBarChangeListener(object: SeekBar.OnSeekBarChangeListener{
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                binding.vkTestClocks.layoutParams = ConstraintLayout.LayoutParams(
+                    (300 * getSystem().displayMetrics.density).toInt(),
+                    (progress * getSystem().displayMetrics.density).toInt()
+                )
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar?) {

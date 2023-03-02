@@ -9,19 +9,32 @@
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintTop_toTopOf="parent">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <com.example.vktest.VKCustomClocksView
                 android:id="@+id/vkTestClocks"
-                android:layout_width="0dp"
+                android:layout_width="300dp"
                 android:layout_height="300dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <SeekBar
+                android:id="@+id/clocksSizeChanger"
+                android:layout_width="300dp"
+                android:layout_height="300dp"
+                android:max="300"
+                android:progress="300"
+                android:rotation="270"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/vkTestClocks"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <LinearLayout
@@ -32,7 +45,8 @@
                 android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/vkTestClocks">
+                app:layout_constraintTop_toBottomOf="@id/clocksSizeChanger">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -100,11 +114,12 @@
                         android:max="100"
                         android:progress="20" />
                 </LinearLayout>
+
                 <TextView
-                    android:layout_marginTop="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="10dp"
                     android:text="Размеры других элементов:" />
 
                 <LinearLayout
@@ -126,6 +141,7 @@
                         android:max="100"
                         android:progress="30" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -146,6 +162,7 @@
                         android:max="100"
                         android:progress="30" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -189,74 +206,72 @@
                 </LinearLayout>
 
                 <TextView
-                    android:layout_marginTop="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Цвета стрелок:"
                     android:layout_gravity="center_horizontal"
-                    />
+                    android:layout_marginTop="10dp"
+                    android:text="Цвета стрелок:" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    >
+                    android:orientation="horizontal">
+
                     <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
+                        android:layout_weight="1"
                         android:gravity="center_horizontal"
-                        >
+                        android:orientation="vertical">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="секундная:"
-                            />
+                            android:text="секундная:" />
+
                         <ImageView
                             android:id="@+id/secondColorChanger"
                             android:layout_width="30dp"
                             android:layout_height="30dp"
-                            android:background="@color/green"
-                            />
+                            android:background="@color/green" />
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
+                        android:layout_weight="1"
                         android:gravity="center_horizontal"
-                        >
+                        android:orientation="vertical">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="минутная:"
-                            />
+                            android:text="минутная:" />
+
                         <ImageView
                             android:id="@+id/minuteColorChanger"
                             android:layout_width="30dp"
                             android:layout_height="30dp"
-                            android:background="@color/green"
-                            />
+                            android:background="@color/green" />
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
+                        android:layout_weight="1"
                         android:gravity="center_horizontal"
-                        >
+                        android:orientation="vertical">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="часовая:"
-                            />
+                            android:text="часовая:" />
+
                         <ImageView
                             android:id="@+id/hourColorChanger"
                             android:layout_width="30dp"
                             android:layout_height="30dp"
-                            android:background="@color/green"
-                            />
+                            android:background="@color/green" />
                     </LinearLayout>
 
                 </LinearLayout>

@@ -37,9 +37,9 @@ class VKCustomClocksView(
     constructor(context: Context) : this(context, null)
 
     private val timer = CurrentTimePicker()
-    private var seconds = NOT_INITIALIZED
-    private var minutes = NOT_INITIALIZED
-    private var hours = NOT_INITIALIZED
+    private var seconds = timer.seconds
+    private var minutes = timer.minutes
+    private var hours = timer.hours
 
     //Настройки секундной стрелки
     var secondHandColor = NOT_INITIALIZED
@@ -66,6 +66,7 @@ class VKCustomClocksView(
             } else {
                 min(max(value, 1), 100)
             }
+            findHandPoints(seconds, DEGREES_PER_SECOND, secondHandLength, secondHandPoints)
             invalidate()
         }
     //Настройки минутной стрелки
@@ -93,6 +94,7 @@ class VKCustomClocksView(
             } else {
                 min(max(value, 1), 100)
             }
+            findHandPoints(minutes, DEGREES_PER_MINUTE, minuteHandLength, minuteHandPoints)
             invalidate()
         }
     //Настройки стрелки часов
@@ -120,6 +122,7 @@ class VKCustomClocksView(
             } else {
                 min(max(value, 1), 100)
             }
+            findHandPoints(hours, DEGREES_PER_HOUR, hourHandLength, hourHandPoints)
             invalidate()
         }
     //Настройки делений
@@ -444,6 +447,7 @@ class VKCustomClocksView(
         numberRadius = computeRadiusForExtraCircle(delimiterRadius, 0, 0.8f)
 
         resetValues()
+        findPositionsToDraw()
 
         timeDelimitersCoordinates = computeExtraCirclePointsByRadius(60, delimiterRadius)
         numberCoordinates = computeExtraCirclePointsByRadius(12, numberRadius)
