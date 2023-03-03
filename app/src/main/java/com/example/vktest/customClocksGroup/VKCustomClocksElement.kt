@@ -52,6 +52,10 @@ abstract class VKCustomClocksElement @JvmOverloads constructor(
         const val PADDING_FOR_POINTS = PADDING_FROM_BORDERS * 0.9f
         const val PADDING_FOR_HANDS_ENDS = PADDING_FOR_POINTS
 
+        const val DEGREES_PER_SECOND = 6f
+        const val DEGREES_PER_MINUTE = 6f
+        const val DEGREES_PER_HOUR = 30f
+
         const val FIRST_INDEX = 0
         const val CIRCLE_DEGREES_FLOAT = 360f
         const val STANDARD_ANGEL_TO_ZERO = 90.0

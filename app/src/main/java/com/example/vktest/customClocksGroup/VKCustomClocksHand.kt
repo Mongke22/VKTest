@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.PointF
 import android.util.AttributeSet
+import android.util.Log
 import com.example.vktest.R
 import kotlin.math.cos
 import kotlin.math.sin
@@ -48,10 +49,11 @@ class VKCustomClocksHand @JvmOverloads constructor(
             } else {
                 Math.min(Math.max(value, 1), 100)
             }
+            val realWidth = field.toFloat() / HUNDRED_PERCENT * maxStrokeWidth
             paint.strokeWidth =
-                field.toFloat() / HUNDRED_PERCENT * maxStrokeWidth
+                realWidth
             paint.setShadowLayer(
-                handWidth.toFloat(),
+                realWidth * 3,
                 HAND_SHADOW_PADDING,
                 HAND_SHADOW_PADDING, handColor
             )
@@ -82,17 +84,6 @@ class VKCustomClocksHand @JvmOverloads constructor(
 
     init {
         initAttributes(attrs!!, defStyleAttr, 0)
-        paint.apply {
-            color = Color.RED
-            style = Paint.Style.STROKE
-            strokeCap = Paint.Cap.ROUND
-            strokeWidth = handWidth / HUNDRED_PERCENT * maxStrokeWidth
-            setShadowLayer(
-                handWidth.toFloat(),
-                HAND_SHADOW_PADDING,
-                HAND_SHADOW_PADDING, Color.RED
-            )
-        }
     }
 
     private fun initAttributes(attributeSet: AttributeSet, defStyleAttr: Int, defStyleRes: Int) {
@@ -109,13 +100,13 @@ class VKCustomClocksHand @JvmOverloads constructor(
 
         degreesPerStep = when (type) {
             HandType.SecondHand -> {
-                6f
+                DEGREES_PER_SECOND
             }
             HandType.MinuteHand -> {
-                6f
+                DEGREES_PER_MINUTE
             }
             HandType.HourHand -> {
-                30f
+                DEGREES_PER_HOUR
             }
             else -> {
                 throw Exception("Undefined hand type")
@@ -165,7 +156,6 @@ class VKCustomClocksHand @JvmOverloads constructor(
     private fun findSin(angel: Float): Float {
         return sin(Math.toRadians(angel - STANDARD_ANGEL_TO_ZERO)).toFloat()
     }
-
 
     companion object {
         enum class HandType {

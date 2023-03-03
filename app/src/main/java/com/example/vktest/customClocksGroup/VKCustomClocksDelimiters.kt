@@ -3,6 +3,7 @@ package com.example.vktest.customClocksGroup
 import android.content.Context
 import android.graphics.*
 import android.util.AttributeSet
+import android.util.Log
 import com.example.vktest.R
 import kotlin.math.cos
 import kotlin.math.sin
@@ -21,12 +22,12 @@ class VKCustomClocksDelimiters @JvmOverloads constructor(
     private var delimitersCount = VKCustomClocksViewGroup.NOT_INITIALIZED
     private var delimiterCoordinates = ArrayList<PointF>()
 
-    private var maxStrokeWidth = 50
+    private var maxStrokeWidth = VKCustomClocksViewGroup.NOT_INITIALIZED
         set(value) {
             field = value
             delimiterWidth = delimiterWidth
         }
-    private var maxNumberSize = 50f
+    private var maxNumberSize = VKCustomClocksViewGroup.NOT_INITIALIZED_FLOAT
         set(value) {
             field = value
             delimiterSize = delimiterSize
@@ -99,7 +100,7 @@ class VKCustomClocksDelimiters @JvmOverloads constructor(
     override fun resetValues() {
         radius *= paddingFromMainCircle
         maxNumberSize = radius / MAX_NUMBER_SIZE_DELIMITER
-        maxStrokeWidth = (radius /MAX_STROKE_WIDTH_DELIMITER).toInt()
+        maxStrokeWidth = (radius / MAX_STROKE_WIDTH_DELIMITER).toInt()
 
         delimiterCoordinates = computeExtraCirclePoints()
     }
@@ -154,7 +155,7 @@ class VKCustomClocksDelimiters @JvmOverloads constructor(
     }
 
     private fun drawNumbers(canvas: Canvas) {
-        var hours = 12
+        var hours = NUMBER_DELIMITERS_COUNT
         val numberRect = Rect()
         for (point in delimiterCoordinates) {
             paint.getTextBounds(
@@ -167,14 +168,13 @@ class VKCustomClocksDelimiters @JvmOverloads constructor(
                 point.y + (numberRect.height() / 2),
                 paint
             )
-            if (hours == 12) {
+            if (hours == NUMBER_DELIMITERS_COUNT) {
                 hours = 1
             } else {
                 hours++
             }
         }
     }
-
 
     companion object {
         enum class DelimiterType {

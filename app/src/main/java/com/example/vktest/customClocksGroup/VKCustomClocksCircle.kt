@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Paint
 import android.util.AttributeSet
+import android.util.Log
 
 class VKCustomClocksCircle @JvmOverloads constructor(
     context: Context,
@@ -11,14 +12,11 @@ class VKCustomClocksCircle @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : VKCustomClocksElement(context, attrs, defStyleAttr) {
 
-
     var maxStrokeWidth = VKCustomClocksViewGroup.NOT_INITIALIZED
         set(value) {
             field = value
             circleWidth = circleWidth
         }
-
-
     var circleColor = VKCustomClocksViewGroup.NOT_INITIALIZED
         set(value) {
             field = value
@@ -43,10 +41,11 @@ class VKCustomClocksCircle @JvmOverloads constructor(
             } else {
                 Math.min(Math.max(value, 1), 100)
             }
+            val realWidth = field.toFloat() / HUNDRED_PERCENT * maxStrokeWidth
             paint.strokeWidth =
-                field.toFloat() / HUNDRED_PERCENT * maxStrokeWidth
+                realWidth
             paint.setShadowLayer(
-                circleWidth.toFloat(),
+                realWidth,
                 CIRCLE_SHADOW_PADDING,
                 CIRCLE_SHADOW_PADDING, circleColor
             )
@@ -76,6 +75,4 @@ class VKCustomClocksCircle @JvmOverloads constructor(
         canvas.drawCircle(center.x, center.y, radius, paint)
     }
 
-    companion object {
-    }
 }
