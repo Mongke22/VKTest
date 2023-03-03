@@ -4,11 +4,13 @@ import android.content.Context
 import android.graphics.Color
 import android.os.Handler
 import android.os.Looper
+import android.os.Parcelable
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.vktest.CurrentTimePicker
 import com.example.vktest.R
+import com.example.vktest.customClocksSingleView.VKCustomClocksView
 import com.example.vktest.databinding.VkCustomClocksViewGroupBinding
 import kotlin.concurrent.thread
 
@@ -275,6 +277,50 @@ class VKCustomClocksViewGroup(
                 }
             }
         }
+    }
+    override fun onSaveInstanceState(): Parcelable? {
+        val superState = super.onSaveInstanceState()!!
+        val savedState = VKCustomClocksView.SavedState(superState)
+        savedState.secondHandColor = secondHandColor
+        savedState.secondHandWidth = secondHandWidth
+        savedState.secondHandLength = secondHandLength
+        savedState.minuteHandColor = minuteHandColor
+        savedState.minuteHandWidth = minuteHandWidth
+        savedState.minuteHandLength = minuteHandLength
+        savedState.hourHandColor = hourHandColor
+        savedState.hourHandWidth = hourHandWidth
+        savedState.hourHandLength = hourHandLength
+        savedState.delimiterColor = delimiterColor
+        savedState.delimiterWidth = delimiterWidth
+        savedState.numberColor = numberColor
+        savedState.numberWidth = numberWidth
+        savedState.numberSize = numberSize
+        savedState.circleBackgroundColor = circleBackgroundColor
+        savedState.circleColor = circleColor
+        savedState.circleWidth = circleWidth
+        return savedState
+    }
+
+    override fun onRestoreInstanceState(state: Parcelable?) {
+        val savedState = state as VKCustomClocksView.SavedState
+        super.onRestoreInstanceState(savedState.superState)
+        secondHandColor = savedState.secondHandColor
+        secondHandWidth = savedState.secondHandWidth
+        secondHandLength = savedState.secondHandLength
+        minuteHandColor = savedState.minuteHandColor
+        minuteHandWidth = savedState.minuteHandWidth
+        minuteHandLength = savedState.minuteHandLength
+        hourHandColor = savedState.hourHandColor
+        hourHandWidth = savedState.hourHandWidth
+        hourHandLength = savedState.hourHandLength
+        delimiterColor = savedState.delimiterColor
+        delimiterWidth = savedState.delimiterWidth
+        numberColor = savedState.numberColor
+        numberWidth = savedState.numberWidth
+        numberSize = savedState.numberSize
+        circleBackgroundColor = savedState.circleBackgroundColor
+        circleColor = savedState.circleColor
+        circleWidth = savedState.circleWidth
     }
 
     companion object {
