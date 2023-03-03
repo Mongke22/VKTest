@@ -25,5 +25,46 @@
           <attr name="circleSize" format="integer"/>
      </declare-styleable>
 
+     <declare-styleable name="VKCustomClocksViewGroup">
+          <attr name="secondsHandColor" format="color"/>
+          <attr name="secondsHandWidth" format="integer"/>
+          <attr name="secondsHandLength" format="integer"/>
+
+          <attr name="minutesHandColor" format="color"/>
+          <attr name="minutesHandWidth" format="integer"/>
+          <attr name="minutesHandLength" format="integer"/>
+
+          <attr name="hoursHandColor" format="color"/>
+          <attr name="hoursHandWidth" format="integer"/>
+          <attr name="hoursHandLength" format="integer"/>
+
+          <attr name="delimitersColor" format="color"/>
+          <attr name="delimitersSize" format="integer"/>
+
+          <attr name="numbersColor" format="color"/>
+          <attr name="numbersSize" format="integer"/>
+          <attr name="numbersWidth" format="integer"/>
+
+          <attr name="circlesBackgroundColor" format="color"/>
+          <attr name="circlesColor" format="color"/>
+          <attr name="circlesSize" format="integer"/>
+     </declare-styleable>
+
+     <declare-styleable name="VKCustomClocksHand">
+          <attr name="handType" format="enum">
+               <enum name="seconds" value="1" />
+               <enum name="minutes" value="2" />
+               <enum name="hours" value="3" />
+          </attr>
+     </declare-styleable>
+
+     <declare-styleable name="VKCustomClocksDelimiters">
+          <attr name="delimiterType" format="enum">
+               <enum name="numbers" value="1"/>
+               <enum name="points" value="2"/>
+          </attr>
+     </declare-styleable>
+
      <attr name="vkCustomClocksStyle" format="reference"/>
+     <attr name="vkCustomClocksGroupStyle" format="reference"/>
 </resources>

@@ -36,6 +36,22 @@ class VKCustomClocksView(
 
     constructor(context: Context) : this(context, null)
 
+
+    private var maxStrokeWidth = 50
+        set(value){
+            field = value
+            secondHandWidth = secondHandWidth
+            minuteHandWidth = minuteHandWidth
+            hourHandWidth = hourHandWidth
+            numberWidth = numberWidth
+            delimiterWidth = delimiterWidth
+        }
+    private var maxNumberSize = 50f
+        set(value){
+            field = value
+            numberSize = numberSize
+        }
+
     private val timer = CurrentTimePicker()
     private var seconds = timer.seconds
     private var minutes = timer.minutes
@@ -46,7 +62,12 @@ class VKCustomClocksView(
         set(value) {
             field = value
             secondHandPaint.color = value
-            secondHandPaint.setShadowLayer(secondHandWidth.toFloat(), HAND_SHADOW_PADDING, HAND_SHADOW_PADDING, value)
+            secondHandPaint.setShadowLayer(
+                secondHandWidth.toFloat(),
+                HAND_SHADOW_PADDING,
+                HAND_SHADOW_PADDING,
+                value
+            )
             invalidate()
         }
     var secondHandWidth = NOT_INITIALIZED
@@ -56,7 +77,7 @@ class VKCustomClocksView(
             } else {
                 min(max(value, 1), 100)
             }
-            secondHandPaint.strokeWidth = field.toFloat() / HUNDRED_PERCENT * MAX_STROKE_WIDTH
+            secondHandPaint.strokeWidth = field.toFloat() / HUNDRED_PERCENT * maxStrokeWidth
             invalidate()
         }
     var secondHandLength = NOT_INITIALIZED
@@ -84,7 +105,7 @@ class VKCustomClocksView(
             } else {
                 min(max(value, 1), 100)
             }
-            minuteHandPaint.strokeWidth = field.toFloat() / HUNDRED_PERCENT * MAX_STROKE_WIDTH
+            minuteHandPaint.strokeWidth = field.toFloat() / HUNDRED_PERCENT * maxStrokeWidth
             invalidate()
         }
     var minuteHandLength = NOT_INITIALIZED
@@ -112,7 +133,7 @@ class VKCustomClocksView(
             } else {
                 min(max(value, 1), 100)
             }
-            hourHandPaint.strokeWidth = field.toFloat() / HUNDRED_PERCENT * MAX_STROKE_WIDTH
+            hourHandPaint.strokeWidth = field.toFloat() / HUNDRED_PERCENT * maxStrokeWidth
             invalidate()
         }
     var hourHandLength = NOT_INITIALIZED
@@ -139,7 +160,7 @@ class VKCustomClocksView(
             } else {
                 min(max(value, 1), 100)
             }
-            delimiterPaint.strokeWidth = field.toFloat() / HUNDRED_PERCENT * MAX_STROKE_WIDTH
+            delimiterPaint.strokeWidth = field.toFloat() / HUNDRED_PERCENT * maxStrokeWidth
             invalidate()
         }
     //Настройки циферблата
@@ -156,7 +177,7 @@ class VKCustomClocksView(
             } else {
                 min(max(value, 1), 100)
             }
-            numberPaint.strokeWidth = field.toFloat() / HUNDRED_PERCENT * MAX_STROKE_WIDTH
+            numberPaint.strokeWidth = field.toFloat() / HUNDRED_PERCENT * maxStrokeWidth
             invalidate()
         }
     var numberSize = NOT_INITIALIZED
@@ -166,7 +187,7 @@ class VKCustomClocksView(
             } else {
                 min(max(value, 1), 100)
             }
-            numberPaint.textSize =  field.toFloat() / HUNDRED_PERCENT * MAX_NUMBER_SIZE
+            numberPaint.textSize =  field.toFloat() / HUNDRED_PERCENT * maxNumberSize
             invalidate()
         }
     //Настройки круга часов
@@ -190,7 +211,7 @@ class VKCustomClocksView(
             } else {
                 min(max(value, 1), 100)
             }
-            circlePaint.strokeWidth = field.toFloat() / HUNDRED_PERCENT * MAX_STROKE_WIDTH
+            circlePaint.strokeWidth = field.toFloat() / HUNDRED_PERCENT * maxStrokeWidth
             invalidate()
         }
 
@@ -323,7 +344,7 @@ class VKCustomClocksView(
             color = secondHandColor
             style = Paint.Style.STROKE
             strokeCap = Paint.Cap.ROUND
-            strokeWidth = secondHandWidth / HUNDRED_PERCENT * MAX_STROKE_WIDTH
+            strokeWidth = secondHandWidth / HUNDRED_PERCENT * maxStrokeWidth
             setShadowLayer(secondHandWidth.toFloat(), HAND_SHADOW_PADDING, HAND_SHADOW_PADDING, secondHandColor)
         }
 
@@ -331,14 +352,14 @@ class VKCustomClocksView(
             color = minuteHandColor
             style = Paint.Style.STROKE
             strokeCap = Paint.Cap.ROUND
-            strokeWidth = minuteHandWidth / HUNDRED_PERCENT * MAX_STROKE_WIDTH
+            strokeWidth = minuteHandWidth / HUNDRED_PERCENT * maxStrokeWidth
             setShadowLayer(minuteHandWidth.toFloat(), HAND_SHADOW_PADDING, HAND_SHADOW_PADDING, minuteHandColor)
         }
 
         hourHandPaint.apply {
             color = hourHandColor
             style = Paint.Style.STROKE
-            strokeWidth = hourHandWidth / HUNDRED_PERCENT * MAX_STROKE_WIDTH
+            strokeWidth = hourHandWidth / HUNDRED_PERCENT * maxStrokeWidth
             setShadowLayer(hourHandWidth.toFloat(), HAND_SHADOW_PADDING, HAND_SHADOW_PADDING, hourHandColor)
             strokeCap = Paint.Cap.ROUND
         }
@@ -364,7 +385,7 @@ class VKCustomClocksView(
 
         numberPaint.apply {
             color = numberColor
-            textSize = numberSize / HUNDRED_PERCENT * MAX_NUMBER_SIZE
+            textSize = numberSize / HUNDRED_PERCENT * maxNumberSize
             style = Paint.Style.STROKE
             strokeWidth = numberWidth.toFloat()
         }
@@ -454,16 +475,8 @@ class VKCustomClocksView(
     }
 
     private fun resetValues(){
-        MAX_STROKE_WIDTH = (radius / MAX_STROKE_WIDTH_DELIMITER).toInt()
-        MAX_NUMBER_SIZE = radius / MAX_NUMBER_SIZE_DELIMITER
-
-        secondHandWidth = secondHandWidth
-        minuteHandWidth = minuteHandWidth
-        hourHandWidth = hourHandWidth
-        numberWidth = numberWidth
-        numberSize = numberSize
-        delimiterWidth = delimiterWidth
-
+        maxStrokeWidth = (radius / MAX_STROKE_WIDTH_DELIMITER).toInt()
+        maxNumberSize = radius / MAX_NUMBER_SIZE_DELIMITER
     }
 
     private fun computeExtraCirclePointsByRadius(
@@ -666,8 +679,6 @@ class VKCustomClocksView(
     }
 
     companion object {
-        private var MAX_STROKE_WIDTH = 50
-        private var MAX_NUMBER_SIZE = 50f
 
         private const val NOT_INITIALIZED = -1
         private const val NOT_INITIALIZED_FLOAT = 0f
