@@ -49,7 +49,7 @@ class VKCustomClocksHand @JvmOverloads constructor(
                 Math.min(Math.max(value, 1), 100)
             }
             paint.strokeWidth =
-                field.toFloat() / VKCustomClocksViewGroup.HUNDRED_PERCENT * maxStrokeWidth
+                field.toFloat() / HUNDRED_PERCENT * maxStrokeWidth
             paint.setShadowLayer(
                 handWidth.toFloat(),
                 HAND_SHADOW_PADDING,
@@ -86,7 +86,7 @@ class VKCustomClocksHand @JvmOverloads constructor(
             color = Color.RED
             style = Paint.Style.STROKE
             strokeCap = Paint.Cap.ROUND
-            strokeWidth = handWidth / VKCustomClocksViewGroup.HUNDRED_PERCENT * maxStrokeWidth
+            strokeWidth = handWidth / HUNDRED_PERCENT * maxStrokeWidth
             setShadowLayer(
                 handWidth.toFloat(),
                 HAND_SHADOW_PADDING,
@@ -127,7 +127,7 @@ class VKCustomClocksHand @JvmOverloads constructor(
 
     override fun resetValues() {
         radius *= PADDING_FOR_HANDS_ENDS
-        maxStrokeWidth = (radius / VKCustomClocksViewGroup.MAX_STROKE_WIDTH_DELIMITER).toInt()
+        maxStrokeWidth = (radius / MAX_STROKE_WIDTH_DELIMITER).toInt()
         findHandPoints()
     }
 
@@ -153,17 +153,17 @@ class VKCustomClocksHand @JvmOverloads constructor(
         startPointF.x = center.x
         startPointF.y = center.y
         finishPointF.x =
-            center.x + (handLength / VKCustomClocksViewGroup.HUNDRED_PERCENT * radius) * finishCosAngle
+            center.x + (handLength / HUNDRED_PERCENT * radius) * finishCosAngle
         finishPointF.y =
-            center.y + (handLength / VKCustomClocksViewGroup.HUNDRED_PERCENT * radius) * finishSinAngle
+            center.y + (handLength / HUNDRED_PERCENT * radius) * finishSinAngle
     }
 
     private fun findCos(angel: Float): Float {
-        return cos(Math.toRadians(angel - VKCustomClocksViewGroup.STANDARD_ANGEL_TO_ZERO)).toFloat()
+        return cos(Math.toRadians(angel - STANDARD_ANGEL_TO_ZERO)).toFloat()
     }
 
     private fun findSin(angel: Float): Float {
-        return sin(Math.toRadians(angel - VKCustomClocksViewGroup.STANDARD_ANGEL_TO_ZERO)).toFloat()
+        return sin(Math.toRadians(angel - STANDARD_ANGEL_TO_ZERO)).toFloat()
     }
 
 

@@ -47,7 +47,7 @@ class VKCustomClocksDelimiters @JvmOverloads constructor(
                 Math.min(Math.max(value, 1), 100)
             }
             paint.textSize =
-                field.toFloat() / VKCustomClocksViewGroup.HUNDRED_PERCENT * maxNumberSize
+                field.toFloat() / HUNDRED_PERCENT * maxNumberSize
             invalidate()
         }
 
@@ -59,7 +59,7 @@ class VKCustomClocksDelimiters @JvmOverloads constructor(
                 Math.min(Math.max(value, 1), 100)
             }
             paint.strokeWidth =
-                field.toFloat() / VKCustomClocksViewGroup.HUNDRED_PERCENT * maxStrokeWidth
+                field.toFloat() / HUNDRED_PERCENT * maxStrokeWidth
             invalidate()
         }
 
@@ -98,8 +98,8 @@ class VKCustomClocksDelimiters @JvmOverloads constructor(
 
     override fun resetValues() {
         radius *= paddingFromMainCircle
-        maxNumberSize = radius / VKCustomClocksViewGroup.MAX_NUMBER_SIZE_DELIMITER
-        maxStrokeWidth = (radius / VKCustomClocksViewGroup.MAX_STROKE_WIDTH_DELIMITER).toInt()
+        maxNumberSize = radius / MAX_NUMBER_SIZE_DELIMITER
+        maxStrokeWidth = (radius /MAX_STROKE_WIDTH_DELIMITER).toInt()
 
         delimiterCoordinates = computeExtraCirclePoints()
     }
@@ -107,14 +107,14 @@ class VKCustomClocksDelimiters @JvmOverloads constructor(
 
     private fun computeExtraCirclePoints(
     ): ArrayList<PointF> {
-        val angle = VKCustomClocksViewGroup.CIRCLE_DEGREES_FLOAT / delimitersCount
+        val angle = CIRCLE_DEGREES_FLOAT / delimitersCount
         val result = ArrayList<PointF>()
         for (indicator in 0 until delimitersCount) {
             val point = PointF()
             val cosAngle =
-                cos(Math.toRadians(indicator * angle - VKCustomClocksViewGroup.STANDARD_ANGEL_TO_ZERO)).toFloat()
+                cos(Math.toRadians(indicator * angle - STANDARD_ANGEL_TO_ZERO)).toFloat()
             val sinAngle =
-                sin(Math.toRadians(indicator * angle - VKCustomClocksViewGroup.STANDARD_ANGEL_TO_ZERO)).toFloat()
+                sin(Math.toRadians(indicator * angle - STANDARD_ANGEL_TO_ZERO)).toFloat()
             point.x = center.x + radius * cosAngle
             point.y = center.y + radius * sinAngle
             result.add(point)

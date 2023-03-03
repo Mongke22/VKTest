@@ -44,7 +44,7 @@ class VKCustomClocksCircle @JvmOverloads constructor(
                 Math.min(Math.max(value, 1), 100)
             }
             paint.strokeWidth =
-                field.toFloat() / VKCustomClocksViewGroup.HUNDRED_PERCENT * maxStrokeWidth
+                field.toFloat() / HUNDRED_PERCENT * maxStrokeWidth
             paint.setShadowLayer(
                 circleWidth.toFloat(),
                 CIRCLE_SHADOW_PADDING,
@@ -59,7 +59,7 @@ class VKCustomClocksCircle @JvmOverloads constructor(
 
     override fun resetValues() {
         radius *= PADDING_FROM_BORDERS
-        maxStrokeWidth = (radius / VKCustomClocksViewGroup.MAX_STROKE_WIDTH_DELIMITER).toInt()
+        maxStrokeWidth = (radius / MAX_STROKE_WIDTH_DELIMITER).toInt()
     }
 
     override fun onDraw(canvas: Canvas) {

@@ -132,13 +132,11 @@ class VKCustomClocksViewGroup(
             binding.mainCircle.circleWidth = value
         }
 
-
-    private var radius = NOT_INITIALIZED_FLOAT
-
     init {
         val inflater = LayoutInflater.from(context)
         inflater.inflate(R.layout.vk_custom_clocks_view_group, this, true)
         binding = VkCustomClocksViewGroupBinding.bind(this)
+
         if (attrs != null) {
             initAttributes(attrs, defStyleAttr, defStyleRes)
         } else {
@@ -279,15 +277,6 @@ class VKCustomClocksViewGroup(
         }
     }
 
-    override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
-        super.onSizeChanged(w, h, oldw, oldh)
-        val safeWidth = w - paddingLeft - paddingRight
-        val safeHeight = h - paddingTop - paddingBottom
-        val safeRadius = Math.min(safeHeight, safeWidth) / 2f
-
-        radius = safeRadius * PADDING_FROM_MAX_RADIUS
-    }
-
     companion object {
 
         const val DEFAULT_COLOR = Color.BLACK
@@ -306,18 +295,7 @@ class VKCustomClocksViewGroup(
         const val DEFAULT_NUMBER_SIZE = 80
         const val DEFAULT_CIRCLE_SIZE = 10
 
-        const val HUNDRED_PERCENT = 100f
-        const val CIRCLE_DEGREES_FLOAT = 360f
-        const val HALF_CIRCLE_DEGREES = 180f
-
         const val NOT_INITIALIZED = 0
         const val NOT_INITIALIZED_FLOAT = 0f
-
-        const val PADDING_FROM_MAX_RADIUS = 0.9f
-
-        const val MAX_STROKE_WIDTH_DELIMITER = 10
-        const val MAX_NUMBER_SIZE_DELIMITER = 3
-
-        const val STANDARD_ANGEL_TO_ZERO = 90.0
     }
 }

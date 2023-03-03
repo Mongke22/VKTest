@@ -53,12 +53,19 @@ abstract class VKCustomClocksElement @JvmOverloads constructor(
         const val PADDING_FOR_HANDS_ENDS = PADDING_FOR_POINTS
 
         const val FIRST_INDEX = 0
+        const val CIRCLE_DEGREES_FLOAT = 360f
+        const val STANDARD_ANGEL_TO_ZERO = 90.0
 
         const val POINT_DELIMITERS_COUNT = 60
         const val NUMBER_DELIMITERS_COUNT = 12
 
         const val DEFAULT_STROKE_WIDTH = 10f
         const val DEFAULT_TEXT_SIZE = 10f
+
+        const val HUNDRED_PERCENT = 100f
+
+        const val MAX_STROKE_WIDTH_DELIMITER = 10
+        const val MAX_NUMBER_SIZE_DELIMITER = 3
 
     }
 
