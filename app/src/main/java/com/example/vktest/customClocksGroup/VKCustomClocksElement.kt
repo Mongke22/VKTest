@@ -1,4 +1,4 @@
-package com.example.vktest
+package com.example.vktest.customClocksGroup
 
 import android.content.Context
 import android.graphics.Paint
@@ -12,7 +12,10 @@ abstract class VKCustomClocksElement @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : View(context, attrs, defStyleAttr) {
 
-    protected var center = PointF(VKCustomClocksViewGroup.NOT_INITIALIZED_FLOAT, VKCustomClocksViewGroup.NOT_INITIALIZED_FLOAT)
+    protected var center = PointF(
+        VKCustomClocksViewGroup.NOT_INITIALIZED_FLOAT,
+        VKCustomClocksViewGroup.NOT_INITIALIZED_FLOAT
+    )
     protected var radius = VKCustomClocksViewGroup.NOT_INITIALIZED_FLOAT
     protected var paint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         color = VKCustomClocksViewGroup.DEFAULT_COLOR
@@ -29,7 +32,7 @@ abstract class VKCustomClocksElement @JvmOverloads constructor(
         val safeHeight = h - paddingTop - paddingBottom
         val safeRadius = Math.min(safeHeight, safeWidth) / 2f
 
-        radius = safeRadius * VKCustomClocksCircle.PADDING_FROM_BORDERS
+        radius = safeRadius
         center.x = paddingLeft + safeWidth / 2f
         center.y = paddingTop + safeHeight / 2f
 
@@ -40,22 +43,22 @@ abstract class VKCustomClocksElement @JvmOverloads constructor(
 
     companion object{
 
-        protected const val CIRCLE_SHADOW_PADDING = 10f
-        protected const val HAND_SHADOW_PADDING = 5f
+        const val CIRCLE_SHADOW_PADDING = 10f
+        const val HAND_SHADOW_PADDING = 5f
 
-        protected const val PADDING_FROM_PARENT_RADIUS = 0.9f
-        protected const val PADDING_FROM_BORDERS = 0.9f
+        const val PADDING_FROM_BORDERS = 0.9f
 
-        protected const val PADDING_FOR_NUMBERS = 0.7f
-        protected const val PADDING_FOR_POINTS = 0.82f
+        const val PADDING_FOR_NUMBERS = PADDING_FROM_BORDERS * 0.7f
+        const val PADDING_FOR_POINTS = PADDING_FROM_BORDERS * 0.9f
+        const val PADDING_FOR_HANDS_ENDS = PADDING_FOR_POINTS
 
-        protected const val FIRST_INDEX = 0
+        const val FIRST_INDEX = 0
 
-        protected const val POINT_DELIMITERS_COUNT = 60
-        protected const val NUMBER_DELIMITERS_COUNT = 12
+        const val POINT_DELIMITERS_COUNT = 60
+        const val NUMBER_DELIMITERS_COUNT = 12
 
-        protected const val DEFAULT_STROKE_WIDTH = 10f
-        protected const val DEFAULT_TEXT_SIZE = 10f
+        const val DEFAULT_STROKE_WIDTH = 10f
+        const val DEFAULT_TEXT_SIZE = 10f
 
     }
 

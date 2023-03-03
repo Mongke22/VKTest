@@ -1,4 +1,4 @@
-package com.example.vktest
+package com.example.vktest.customClocksGroup
 
 import android.content.Context
 import android.graphics.Color
@@ -6,10 +6,9 @@ import android.os.Handler
 import android.os.Looper
 import android.util.AttributeSet
 import android.view.LayoutInflater
-import android.view.View
-import android.widget.FrameLayout
-import android.widget.TimePicker
 import androidx.constraintlayout.widget.ConstraintLayout
+import com.example.vktest.CurrentTimePicker
+import com.example.vktest.R
 import com.example.vktest.databinding.VkCustomClocksViewGroupBinding
 import kotlin.concurrent.thread
 

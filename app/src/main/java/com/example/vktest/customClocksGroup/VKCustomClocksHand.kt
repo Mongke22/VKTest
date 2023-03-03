@@ -1,4 +1,4 @@
-package com.example.vktest
+package com.example.vktest.customClocksGroup
 
 import android.content.Context
 import android.graphics.Canvas
@@ -6,8 +6,7 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.PointF
 import android.util.AttributeSet
-import android.util.Log
-import android.view.View
+import com.example.vktest.R
 import kotlin.math.cos
 import kotlin.math.sin
 
@@ -16,7 +15,7 @@ class VKCustomClocksHand @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
-) : View(context, attrs, defStyleAttr) {
+) : VKCustomClocksElement(context, attrs, defStyleAttr) {
 
     var handColor = VKCustomClocksViewGroup.NOT_INITIALIZED
         set(value) {
@@ -78,11 +77,7 @@ class VKCustomClocksHand @JvmOverloads constructor(
 
     private var type = HandType.Undefined
 
-    private var center = PointF(VKCustomClocksViewGroup.NOT_INITIALIZED_FLOAT, VKCustomClocksViewGroup.NOT_INITIALIZED_FLOAT)
-    private var radius = VKCustomClocksViewGroup.NOT_INITIALIZED_FLOAT
     private var degreesPerStep = VKCustomClocksViewGroup.NOT_INITIALIZED_FLOAT
-
-    private val paint = Paint(Paint.ANTI_ALIAS_FLAG)
 
     init {
         initAttributes(attrs!!, defStyleAttr, 0)
@@ -128,22 +123,8 @@ class VKCustomClocksHand @JvmOverloads constructor(
 
         typedArray.recycle()
     }
-
-    override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
-        super.onSizeChanged(w, h, oldw, oldh)
-
-        val safeWidth = w - paddingLeft - paddingRight
-        val safeHeight = h - paddingTop - paddingBottom
-        val safeRadius = Math.min(safeHeight, safeWidth) / 2f
-
-        radius = safeRadius * PADDING_FROM_PARENT_RADIUS
-        center.x = paddingLeft + safeWidth / 2f
-        center.y = paddingTop + safeHeight / 2f
-
-        resetValues()
-    }
-
-    private fun resetValues() {
+    override fun resetValues() {
+        radius *= PADDING_FOR_HANDS_ENDS
         maxStrokeWidth = (radius / VKCustomClocksViewGroup.MAX_STROKE_WIDTH_DELIMITER).toInt()
         findHandPoints()
     }
@@ -164,8 +145,7 @@ class VKCustomClocksHand @JvmOverloads constructor(
     }
     private fun findHandPoints(
     ) {
-        val startCosAngle = findCos(currentTime * degreesPerStep + VKCustomClocksViewGroup.HALF_CIRCLE_DEGREES)
-        val startSinAngle = findSin(currentTime * degreesPerStep + VKCustomClocksViewGroup.HALF_CIRCLE_DEGREES)
+
         val finishCosAngle = findCos(currentTime * degreesPerStep)
         val finishSinAngle = findSin(currentTime * degreesPerStep)
         startPointF.x = center.x

@@ -1,9 +1,9 @@
-package com.example.vktest
+package com.example.vktest.customClocksGroup
 
 import android.content.Context
 import android.graphics.*
 import android.util.AttributeSet
-import android.view.View
+import com.example.vktest.R
 import kotlin.math.cos
 import kotlin.math.sin
 
@@ -11,15 +11,12 @@ class VKCustomClocksDelimiters @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
-) : View(context, attrs, defStyleAttr) {
+) : VKCustomClocksElement(context, attrs, defStyleAttr) {
 
 
     private var type = DelimiterType.Undefined
 
-    private var center = PointF(VKCustomClocksViewGroup.NOT_INITIALIZED_FLOAT, VKCustomClocksViewGroup.NOT_INITIALIZED_FLOAT)
-    private var radius = VKCustomClocksViewGroup.NOT_INITIALIZED_FLOAT
-
-    private var paddingFromParentRadius = VKCustomClocksViewGroup.NOT_INITIALIZED_FLOAT
+    private var paddingFromMainCircle = VKCustomClocksViewGroup.NOT_INITIALIZED_FLOAT
 
     private var delimitersCount = VKCustomClocksViewGroup.NOT_INITIALIZED
     private var delimiterCoordinates = ArrayList<PointF>()
@@ -34,14 +31,6 @@ class VKCustomClocksDelimiters @JvmOverloads constructor(
             field = value
             delimiterSize = delimiterSize
         }
-
-    private var paint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-        color = VKCustomClocksViewGroup.DEFAULT_COLOR
-        strokeWidth = DEFAULT_STROKE_WIDTH
-        textSize = DEFAULT_TEXT_SIZE
-        style = Paint.Style.STROKE
-        strokeCap = Paint.Cap.ROUND
-    }
 
     var delimiterColor = VKCustomClocksViewGroup.NOT_INITIALIZED
         set(value){
@@ -74,7 +63,6 @@ class VKCustomClocksDelimiters @JvmOverloads constructor(
 
     init {
         initAttributes(attrs!!, defStyleAttr, 0)
-
     }
 
     private fun initAttributes(attributeSet: AttributeSet, defStyleAttr: Int, defStyleRes: Int) {
@@ -92,11 +80,11 @@ class VKCustomClocksDelimiters @JvmOverloads constructor(
         when(type){
             DelimiterType.PointDelimiter -> {
                 delimitersCount = POINT_DELIMITERS_COUNT
-                paddingFromParentRadius = PADDING_FOR_POINTS
+                paddingFromMainCircle = PADDING_FOR_POINTS
             }
             DelimiterType.NumberDelimiter -> {
                 delimitersCount = NUMBER_DELIMITERS_COUNT
-                paddingFromParentRadius = PADDING_FOR_NUMBERS
+                paddingFromMainCircle = PADDING_FOR_NUMBERS
             }
             else -> {
                 throw Exception("Undefined delimiter type")
@@ -106,21 +94,8 @@ class VKCustomClocksDelimiters @JvmOverloads constructor(
         typedArray.recycle()
     }
 
-    override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
-        super.onSizeChanged(w, h, oldw, oldh)
-
-        val safeWidth = w - paddingLeft - paddingRight
-        val safeHeight = h - paddingTop - paddingBottom
-        val safeRadius = Math.min(safeHeight, safeWidth) / 2f
-
-        radius = safeRadius * paddingFromParentRadius
-        center.x = paddingLeft + safeWidth / 2f
-        center.y = paddingTop + safeHeight / 2f
-
-        resetValues()
-    }
-
-    private fun resetValues(){
+    override fun resetValues(){
+        radius *= paddingFromMainCircle
         maxNumberSize = radius / VKCustomClocksViewGroup.MAX_NUMBER_SIZE_DELIMITER
         maxStrokeWidth = (radius / VKCustomClocksViewGroup.MAX_STROKE_WIDTH_DELIMITER).toInt()
 

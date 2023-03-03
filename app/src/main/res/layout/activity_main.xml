@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <com.example.vktest.VKCustomClocksViewGroup
+            <com.example.vktest.customClocksGroup.VKCustomClocksViewGroup
                 android:id="@+id/vkTestClocks"
                 android:layout_width="300dp"
                 android:layout_height="300dp"

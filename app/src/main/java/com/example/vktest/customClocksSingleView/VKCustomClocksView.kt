@@ -1,4 +1,4 @@
-package com.example.vktest
+package com.example.vktest.customClocksSingleView
 
 import android.content.Context
 import android.graphics.*
@@ -8,6 +8,8 @@ import android.os.Parcel
 import android.os.Parcelable
 import android.util.AttributeSet
 import android.view.View
+import com.example.vktest.CurrentTimePicker
+import com.example.vktest.R
 import java.lang.Math.max
 import java.lang.Math.min
 import kotlin.concurrent.thread
