@@ -22,42 +22,44 @@ class VKCustomClocksDelimiters @JvmOverloads constructor(
     private var delimiterCoordinates = ArrayList<PointF>()
 
     private var maxStrokeWidth = 50
-        set(value){
+        set(value) {
             field = value
             delimiterWidth = delimiterWidth
         }
     private var maxNumberSize = 50f
-        set(value){
+        set(value) {
             field = value
             delimiterSize = delimiterSize
         }
 
     var delimiterColor = VKCustomClocksViewGroup.NOT_INITIALIZED
-        set(value){
+        set(value) {
             field = value
             paint.color = value
             invalidate()
         }
 
     var delimiterSize = VKCustomClocksViewGroup.NOT_INITIALIZED
-        set(value){
-            field = if(value in 1..100){
+        set(value) {
+            field = if (value in 1..100) {
                 value
-            }else {
+            } else {
                 Math.min(Math.max(value, 1), 100)
             }
-            paint.textSize = field.toFloat() / VKCustomClocksViewGroup.HUNDRED_PERCENT * maxNumberSize
+            paint.textSize =
+                field.toFloat() / VKCustomClocksViewGroup.HUNDRED_PERCENT * maxNumberSize
             invalidate()
         }
 
     var delimiterWidth = VKCustomClocksViewGroup.NOT_INITIALIZED
-        set(value){
-            field = if(value in 1..100){
+        set(value) {
+            field = if (value in 1..100) {
                 value
-            }else {
+            } else {
                 Math.min(Math.max(value, 1), 100)
             }
-            paint.strokeWidth = field.toFloat() / VKCustomClocksViewGroup.HUNDRED_PERCENT * maxStrokeWidth
+            paint.strokeWidth =
+                field.toFloat() / VKCustomClocksViewGroup.HUNDRED_PERCENT * maxStrokeWidth
             invalidate()
         }
 
@@ -74,10 +76,10 @@ class VKCustomClocksDelimiters @JvmOverloads constructor(
         )
         type = DelimiterType.values()[typedArray.getInt(
             R.styleable.VKCustomClocksDelimiters_delimiterType,
-           DelimiterType.Undefined.ordinal
+            DelimiterType.Undefined.ordinal
         )]
 
-        when(type){
+        when (type) {
             DelimiterType.PointDelimiter -> {
                 delimitersCount = POINT_DELIMITERS_COUNT
                 paddingFromMainCircle = PADDING_FOR_POINTS
@@ -94,7 +96,7 @@ class VKCustomClocksDelimiters @JvmOverloads constructor(
         typedArray.recycle()
     }
 
-    override fun resetValues(){
+    override fun resetValues() {
         radius *= paddingFromMainCircle
         maxNumberSize = radius / VKCustomClocksViewGroup.MAX_NUMBER_SIZE_DELIMITER
         maxStrokeWidth = (radius / VKCustomClocksViewGroup.MAX_STROKE_WIDTH_DELIMITER).toInt()
@@ -109,8 +111,10 @@ class VKCustomClocksDelimiters @JvmOverloads constructor(
         val result = ArrayList<PointF>()
         for (indicator in 0 until delimitersCount) {
             val point = PointF()
-            val cosAngle = cos(Math.toRadians(indicator * angle - VKCustomClocksViewGroup.STANDARD_ANGEL_TO_ZERO)).toFloat()
-            val sinAngle = sin(Math.toRadians(indicator * angle - VKCustomClocksViewGroup.STANDARD_ANGEL_TO_ZERO)).toFloat()
+            val cosAngle =
+                cos(Math.toRadians(indicator * angle - VKCustomClocksViewGroup.STANDARD_ANGEL_TO_ZERO)).toFloat()
+            val sinAngle =
+                sin(Math.toRadians(indicator * angle - VKCustomClocksViewGroup.STANDARD_ANGEL_TO_ZERO)).toFloat()
             point.x = center.x + radius * cosAngle
             point.y = center.y + radius * sinAngle
             result.add(point)
@@ -121,7 +125,7 @@ class VKCustomClocksDelimiters @JvmOverloads constructor(
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
-        when(type){
+        when (type) {
             DelimiterType.PointDelimiter -> {
                 drawPoints(canvas)
             }
@@ -134,7 +138,7 @@ class VKCustomClocksDelimiters @JvmOverloads constructor(
         }
     }
 
-    private fun drawPoints(canvas: Canvas){
+    private fun drawPoints(canvas: Canvas) {
         for (index in delimiterCoordinates.indices) {
             if (index % 5 == 0) {
                 paint.color = delimiterColor
@@ -149,12 +153,14 @@ class VKCustomClocksDelimiters @JvmOverloads constructor(
         }
     }
 
-    private fun drawNumbers(canvas: Canvas){
+    private fun drawNumbers(canvas: Canvas) {
         var hours = 12
         val numberRect = Rect()
         for (point in delimiterCoordinates) {
-            paint.getTextBounds(hours.toString(),
-                FIRST_INDEX, hours.toString().length, numberRect)
+            paint.getTextBounds(
+                hours.toString(),
+                FIRST_INDEX, hours.toString().length, numberRect
+            )
             canvas.drawText(
                 hours.toString(),
                 point.x - (numberRect.width() / 2),
@@ -170,9 +176,9 @@ class VKCustomClocksDelimiters @JvmOverloads constructor(
     }
 
 
-    companion object{
+    companion object {
         enum class DelimiterType {
-            Undefined,  NumberDelimiter, PointDelimiter
+            Undefined, NumberDelimiter, PointDelimiter
         }
 
     }

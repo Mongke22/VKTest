@@ -41,7 +41,7 @@ abstract class VKCustomClocksElement @JvmOverloads constructor(
 
     protected abstract fun resetValues()
 
-    companion object{
+    companion object {
 
         const val CIRCLE_SHADOW_PADDING = 10f
         const val HAND_SHADOW_PADDING = 5f

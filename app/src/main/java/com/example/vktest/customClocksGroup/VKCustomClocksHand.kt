@@ -19,7 +19,7 @@ class VKCustomClocksHand @JvmOverloads constructor(
 
     var handColor = VKCustomClocksViewGroup.NOT_INITIALIZED
         set(value) {
-            if(field != value) {
+            if (field != value) {
                 field = value
                 paint.color = value
                 paint.setShadowLayer(
@@ -48,7 +48,8 @@ class VKCustomClocksHand @JvmOverloads constructor(
             } else {
                 Math.min(Math.max(value, 1), 100)
             }
-            paint.strokeWidth = field.toFloat() / VKCustomClocksViewGroup.HUNDRED_PERCENT * maxStrokeWidth
+            paint.strokeWidth =
+                field.toFloat() / VKCustomClocksViewGroup.HUNDRED_PERCENT * maxStrokeWidth
             paint.setShadowLayer(
                 handWidth.toFloat(),
                 HAND_SHADOW_PADDING,
@@ -58,14 +59,14 @@ class VKCustomClocksHand @JvmOverloads constructor(
         }
 
     var maxStrokeWidth = VKCustomClocksViewGroup.NOT_INITIALIZED
-        set(value){
+        set(value) {
             field = value
             handWidth = handWidth
         }
 
     var currentTime = VKCustomClocksViewGroup.NOT_INITIALIZED
-        set(value){
-            if(field != value) {
+        set(value) {
+            if (field != value) {
                 field = value
                 findHandPoints()
                 invalidate()
@@ -106,7 +107,7 @@ class VKCustomClocksHand @JvmOverloads constructor(
             HandType.Undefined.ordinal
         )]
 
-        degreesPerStep = when(type){
+        degreesPerStep = when (type) {
             HandType.SecondHand -> {
                 6f
             }
@@ -123,6 +124,7 @@ class VKCustomClocksHand @JvmOverloads constructor(
 
         typedArray.recycle()
     }
+
     override fun resetValues() {
         radius *= PADDING_FOR_HANDS_ENDS
         maxStrokeWidth = (radius / VKCustomClocksViewGroup.MAX_STROKE_WIDTH_DELIMITER).toInt()
@@ -143,15 +145,17 @@ class VKCustomClocksHand @JvmOverloads constructor(
             paint
         )
     }
+
     private fun findHandPoints(
     ) {
-
         val finishCosAngle = findCos(currentTime * degreesPerStep)
         val finishSinAngle = findSin(currentTime * degreesPerStep)
         startPointF.x = center.x
         startPointF.y = center.y
-        finishPointF.x = center.x + (handLength / VKCustomClocksViewGroup.HUNDRED_PERCENT * radius) * finishCosAngle
-        finishPointF.y = center.y + (handLength / VKCustomClocksViewGroup.HUNDRED_PERCENT * radius) * finishSinAngle
+        finishPointF.x =
+            center.x + (handLength / VKCustomClocksViewGroup.HUNDRED_PERCENT * radius) * finishCosAngle
+        finishPointF.y =
+            center.y + (handLength / VKCustomClocksViewGroup.HUNDRED_PERCENT * radius) * finishSinAngle
     }
 
     private fun findCos(angel: Float): Float {

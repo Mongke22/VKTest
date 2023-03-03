@@ -13,38 +13,43 @@ class VKCustomClocksCircle @JvmOverloads constructor(
 
 
     var maxStrokeWidth = VKCustomClocksViewGroup.NOT_INITIALIZED
-        set(value){
+        set(value) {
             field = value
             circleWidth = circleWidth
         }
 
 
     var circleColor = VKCustomClocksViewGroup.NOT_INITIALIZED
-        set(value){
+        set(value) {
             field = value
             paint.color = value
-            paint.setShadowLayer(circleWidth.toFloat(),
+            paint.setShadowLayer(
+                circleWidth.toFloat(),
                 CIRCLE_SHADOW_PADDING,
-                CIRCLE_SHADOW_PADDING, value)
+                CIRCLE_SHADOW_PADDING, value
+            )
             invalidate()
         }
     var backgroundCircleColor = VKCustomClocksViewGroup.NOT_INITIALIZED
-        set(value){
+        set(value) {
             field = value
             backGroundPaint.color = value
             invalidate()
         }
     var circleWidth = VKCustomClocksViewGroup.NOT_INITIALIZED
-        set(value){
+        set(value) {
             field = if (value in 1..100) {
                 value
             } else {
                 Math.min(Math.max(value, 1), 100)
             }
-            paint.strokeWidth = field.toFloat() / VKCustomClocksViewGroup.HUNDRED_PERCENT * maxStrokeWidth
-            paint.setShadowLayer(circleWidth.toFloat(),
+            paint.strokeWidth =
+                field.toFloat() / VKCustomClocksViewGroup.HUNDRED_PERCENT * maxStrokeWidth
+            paint.setShadowLayer(
+                circleWidth.toFloat(),
                 CIRCLE_SHADOW_PADDING,
-                CIRCLE_SHADOW_PADDING, circleColor)
+                CIRCLE_SHADOW_PADDING, circleColor
+            )
             invalidate()
         }
 
@@ -52,7 +57,7 @@ class VKCustomClocksCircle @JvmOverloads constructor(
         style = Paint.Style.FILL
     }
 
-    override fun resetValues(){
+    override fun resetValues() {
         radius *= PADDING_FROM_BORDERS
         maxStrokeWidth = (radius / VKCustomClocksViewGroup.MAX_STROKE_WIDTH_DELIMITER).toInt()
     }
@@ -63,14 +68,14 @@ class VKCustomClocksCircle @JvmOverloads constructor(
         drawMainCircle(canvas)
     }
 
-    private fun drawBackGround(canvas: Canvas){
+    private fun drawBackGround(canvas: Canvas) {
         canvas.drawCircle(center.x, center.y, radius, backGroundPaint)
     }
 
-    private fun drawMainCircle(canvas: Canvas){
+    private fun drawMainCircle(canvas: Canvas) {
         canvas.drawCircle(center.x, center.y, radius, paint)
     }
 
-    companion object{
+    companion object {
     }
 }

@@ -40,7 +40,7 @@ class VKCustomClocksView(
 
 
     private var maxStrokeWidth = 50
-        set(value){
+        set(value) {
             field = value
             secondHandWidth = secondHandWidth
             minuteHandWidth = minuteHandWidth
@@ -49,7 +49,7 @@ class VKCustomClocksView(
             delimiterWidth = delimiterWidth
         }
     private var maxNumberSize = 50f
-        set(value){
+        set(value) {
             field = value
             numberSize = numberSize
         }
@@ -92,12 +92,18 @@ class VKCustomClocksView(
             findHandPoints(seconds, DEGREES_PER_SECOND, secondHandLength, secondHandPoints)
             invalidate()
         }
+
     //Настройки минутной стрелки
     var minuteHandColor = NOT_INITIALIZED
         set(value) {
             field = value
             minuteHandPaint.color = value
-            minuteHandPaint.setShadowLayer(minuteHandWidth.toFloat(), HAND_SHADOW_PADDING, HAND_SHADOW_PADDING, value)
+            minuteHandPaint.setShadowLayer(
+                minuteHandWidth.toFloat(),
+                HAND_SHADOW_PADDING,
+                HAND_SHADOW_PADDING,
+                value
+            )
             invalidate()
         }
     var minuteHandWidth = NOT_INITIALIZED
@@ -120,12 +126,18 @@ class VKCustomClocksView(
             findHandPoints(minutes, DEGREES_PER_MINUTE, minuteHandLength, minuteHandPoints)
             invalidate()
         }
+
     //Настройки стрелки часов
     var hourHandColor = NOT_INITIALIZED
         set(value) {
             field = value
             hourHandPaint.color = value
-            hourHandPaint.setShadowLayer(hourHandWidth.toFloat(), HAND_SHADOW_PADDING, HAND_SHADOW_PADDING, value)
+            hourHandPaint.setShadowLayer(
+                hourHandWidth.toFloat(),
+                HAND_SHADOW_PADDING,
+                HAND_SHADOW_PADDING,
+                value
+            )
             invalidate()
         }
     var hourHandWidth = NOT_INITIALIZED
@@ -148,6 +160,7 @@ class VKCustomClocksView(
             findHandPoints(hours, DEGREES_PER_HOUR, hourHandLength, hourHandPoints)
             invalidate()
         }
+
     //Настройки делений
     var delimiterColor = NOT_INITIALIZED
         set(value) {
@@ -165,6 +178,7 @@ class VKCustomClocksView(
             delimiterPaint.strokeWidth = field.toFloat() / HUNDRED_PERCENT * maxStrokeWidth
             invalidate()
         }
+
     //Настройки циферблата
     var numberColor = NOT_INITIALIZED
         set(value) {
@@ -189,9 +203,10 @@ class VKCustomClocksView(
             } else {
                 min(max(value, 1), 100)
             }
-            numberPaint.textSize =  field.toFloat() / HUNDRED_PERCENT * maxNumberSize
+            numberPaint.textSize = field.toFloat() / HUNDRED_PERCENT * maxNumberSize
             invalidate()
         }
+
     //Настройки круга часов
     var circleBackgroundColor = NOT_INITIALIZED
         set(value) {
@@ -203,7 +218,12 @@ class VKCustomClocksView(
         set(value) {
             field = value
             circlePaint.color = value
-            circlePaint.setShadowLayer(circleWidth.toFloat(), CIRCLE_SHADOW_PADDING, CIRCLE_SHADOW_PADDING, value)
+            circlePaint.setShadowLayer(
+                circleWidth.toFloat(),
+                CIRCLE_SHADOW_PADDING,
+                CIRCLE_SHADOW_PADDING,
+                value
+            )
             invalidate()
         }
     var circleWidth = NOT_INITIALIZED
@@ -347,7 +367,12 @@ class VKCustomClocksView(
             style = Paint.Style.STROKE
             strokeCap = Paint.Cap.ROUND
             strokeWidth = secondHandWidth / HUNDRED_PERCENT * maxStrokeWidth
-            setShadowLayer(secondHandWidth.toFloat(), HAND_SHADOW_PADDING, HAND_SHADOW_PADDING, secondHandColor)
+            setShadowLayer(
+                secondHandWidth.toFloat(),
+                HAND_SHADOW_PADDING,
+                HAND_SHADOW_PADDING,
+                secondHandColor
+            )
         }
 
         minuteHandPaint.apply {
@@ -355,14 +380,24 @@ class VKCustomClocksView(
             style = Paint.Style.STROKE
             strokeCap = Paint.Cap.ROUND
             strokeWidth = minuteHandWidth / HUNDRED_PERCENT * maxStrokeWidth
-            setShadowLayer(minuteHandWidth.toFloat(), HAND_SHADOW_PADDING, HAND_SHADOW_PADDING, minuteHandColor)
+            setShadowLayer(
+                minuteHandWidth.toFloat(),
+                HAND_SHADOW_PADDING,
+                HAND_SHADOW_PADDING,
+                minuteHandColor
+            )
         }
 
         hourHandPaint.apply {
             color = hourHandColor
             style = Paint.Style.STROKE
             strokeWidth = hourHandWidth / HUNDRED_PERCENT * maxStrokeWidth
-            setShadowLayer(hourHandWidth.toFloat(), HAND_SHADOW_PADDING, HAND_SHADOW_PADDING, hourHandColor)
+            setShadowLayer(
+                hourHandWidth.toFloat(),
+                HAND_SHADOW_PADDING,
+                HAND_SHADOW_PADDING,
+                hourHandColor
+            )
             strokeCap = Paint.Cap.ROUND
         }
 
@@ -370,7 +405,12 @@ class VKCustomClocksView(
             color = circleColor
             style = Paint.Style.STROKE
             strokeWidth = circleWidth.toFloat()
-            setShadowLayer(circleWidth.toFloat(), CIRCLE_SHADOW_PADDING, CIRCLE_SHADOW_PADDING, circleColor)
+            setShadowLayer(
+                circleWidth.toFloat(),
+                CIRCLE_SHADOW_PADDING,
+                CIRCLE_SHADOW_PADDING,
+                circleColor
+            )
         }
 
         backGroundCirclePaint.apply {
@@ -378,7 +418,7 @@ class VKCustomClocksView(
             style = Paint.Style.FILL
         }
 
-         delimiterPaint.apply {
+        delimiterPaint.apply {
             color = delimiterColor
             style = Paint.Style.STROKE
             strokeCap = Paint.Cap.ROUND
@@ -395,7 +435,7 @@ class VKCustomClocksView(
 
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
-        if(canvas == null){
+        if (canvas == null) {
             throw Exception("Canvas in sull")
         }
         drawMainCircle(canvas)
@@ -406,7 +446,7 @@ class VKCustomClocksView(
         drawHand(canvas, hourHandPoints, hourHandPaint)
     }
 
-    private fun drawMainCircle(canvas: Canvas){
+    private fun drawMainCircle(canvas: Canvas) {
         canvas.drawCircle(center.x, center.y, radius, backGroundCirclePaint)
         canvas.drawCircle(center.x, center.y, radius, circlePaint)
     }
@@ -430,7 +470,12 @@ class VKCustomClocksView(
         var hours = 12
         var numberRect = Rect()
         for (point in numberCoordinates) {
-            numberPaint.getTextBounds(hours.toString(), FIRST_INDEX, hours.toString().length, numberRect)
+            numberPaint.getTextBounds(
+                hours.toString(),
+                FIRST_INDEX,
+                hours.toString().length,
+                numberRect
+            )
             canvas.drawText(
                 hours.toString(),
                 point.x - (numberRect.width() / 2),
@@ -467,7 +512,8 @@ class VKCustomClocksView(
         center.y = paddingTop + safeHeight / 2f
 
         delimiterRadius = computeRadiusForExtraCircle(radius, circleWidth)
-        numberRadius = computeRadiusForExtraCircle(delimiterRadius, 0, PADDING_FROM_DELIMITER_RADIUS)
+        numberRadius =
+            computeRadiusForExtraCircle(delimiterRadius, 0, PADDING_FROM_DELIMITER_RADIUS)
 
         resetValues()
         findPositionsToDraw()
@@ -476,7 +522,7 @@ class VKCustomClocksView(
         numberCoordinates = computeExtraCirclePointsByRadius(12, numberRadius)
     }
 
-    private fun resetValues(){
+    private fun resetValues() {
         maxStrokeWidth = (radius / MAX_STROKE_WIDTH_DELIMITER).toInt()
         maxNumberSize = radius / MAX_NUMBER_SIZE_DELIMITER
     }
@@ -582,26 +628,26 @@ class VKCustomClocksView(
     override fun onRestoreInstanceState(state: Parcelable?) {
         val savedState = state as SavedState
         super.onRestoreInstanceState(savedState.superState)
-       secondHandColor = savedState.secondHandColor
-       secondHandWidth = savedState.secondHandWidth
-       secondHandLength = savedState.secondHandLength
-       minuteHandColor = savedState.minuteHandColor
-       minuteHandWidth = savedState.minuteHandWidth
-       minuteHandLength = savedState.minuteHandLength
-       hourHandColor = savedState.hourHandColor
-       hourHandWidth = savedState.hourHandWidth
-       hourHandLength = savedState.hourHandLength
-       delimiterColor = savedState.delimiterColor
-       delimiterWidth = savedState.delimiterWidth
-       numberColor = savedState.numberColor
-       numberWidth = savedState.numberWidth
-       numberSize = savedState.numberSize
-       circleBackgroundColor = savedState.circleBackgroundColor
-       circleColor = savedState.circleColor
-       circleWidth = savedState.circleWidth
+        secondHandColor = savedState.secondHandColor
+        secondHandWidth = savedState.secondHandWidth
+        secondHandLength = savedState.secondHandLength
+        minuteHandColor = savedState.minuteHandColor
+        minuteHandWidth = savedState.minuteHandWidth
+        minuteHandLength = savedState.minuteHandLength
+        hourHandColor = savedState.hourHandColor
+        hourHandWidth = savedState.hourHandWidth
+        hourHandLength = savedState.hourHandLength
+        delimiterColor = savedState.delimiterColor
+        delimiterWidth = savedState.delimiterWidth
+        numberColor = savedState.numberColor
+        numberWidth = savedState.numberWidth
+        numberSize = savedState.numberSize
+        circleBackgroundColor = savedState.circleBackgroundColor
+        circleColor = savedState.circleColor
+        circleWidth = savedState.circleWidth
     }
 
-    class SavedState: BaseSavedState{
+    class SavedState : BaseSavedState {
         var secondHandColor: Int = NOT_INITIALIZED
         var secondHandWidth: Int = NOT_INITIALIZED
         var secondHandLength: Int = NOT_INITIALIZED
@@ -619,8 +665,9 @@ class VKCustomClocksView(
         var circleBackgroundColor: Int = NOT_INITIALIZED
         var circleColor: Int = NOT_INITIALIZED
         var circleWidth: Int = NOT_INITIALIZED
-        constructor(superState: Parcelable): super(superState)
-        constructor(parcel: Parcel): super(parcel){
+
+        constructor(superState: Parcelable) : super(superState)
+        constructor(parcel: Parcel) : super(parcel) {
             secondHandColor = parcel.readInt()
             secondHandWidth = parcel.readInt()
             secondHandLength = parcel.readInt()
@@ -664,15 +711,15 @@ class VKCustomClocksView(
 
         }
 
-        companion object{
+        companion object {
             @JvmField
-            val CREATOR: Parcelable.Creator<SavedState> = object : Parcelable.Creator<SavedState>{
+            val CREATOR: Parcelable.Creator<SavedState> = object : Parcelable.Creator<SavedState> {
                 override fun createFromParcel(source: Parcel): SavedState {
                     return SavedState(source)
                 }
 
                 override fun newArray(size: Int): Array<SavedState?> {
-                    return Array(size){null}
+                    return Array(size) { null }
                 }
 
             }
