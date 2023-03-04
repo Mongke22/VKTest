@@ -36,11 +36,7 @@ class VKCustomClocksCircle @JvmOverloads constructor(
         }
     var circleWidth = VKCustomClocksViewGroup.NOT_INITIALIZED
         set(value) {
-            field = if (value in 1..100) {
-                value
-            } else {
-                Math.min(Math.max(value, 1), 100)
-            }
+            field = value.coerceIn(1..100)
             val realWidth = field.toFloat() / HUNDRED_PERCENT * maxStrokeWidth
             paint.strokeWidth =
                 realWidth

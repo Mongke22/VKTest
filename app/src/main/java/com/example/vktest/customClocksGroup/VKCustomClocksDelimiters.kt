@@ -42,11 +42,7 @@ class VKCustomClocksDelimiters @JvmOverloads constructor(
 
     var delimiterSize = VKCustomClocksViewGroup.NOT_INITIALIZED
         set(value) {
-            field = if (value in 1..100) {
-                value
-            } else {
-                Math.min(Math.max(value, 1), 100)
-            }
+            field = value.coerceIn(1..100)
             paint.textSize =
                 field.toFloat() / HUNDRED_PERCENT * maxNumberSize
             invalidate()
@@ -54,18 +50,19 @@ class VKCustomClocksDelimiters @JvmOverloads constructor(
 
     var delimiterWidth = VKCustomClocksViewGroup.NOT_INITIALIZED
         set(value) {
-            field = if (value in 1..100) {
-                value
-            } else {
-                Math.min(Math.max(value, 1), 100)
-            }
+            field = value.coerceIn(1..100)
             paint.strokeWidth =
                 field.toFloat() / HUNDRED_PERCENT * maxStrokeWidth
             invalidate()
         }
 
     init {
-        initAttributes(attrs!!, defStyleAttr, 0)
+        if(attrs != null){
+            initAttributes(attrs, defStyleAttr, 0)
+        }
+        else {
+            throw Exception("Delimiter type is missing")
+        }
     }
 
     private fun initAttributes(attributeSet: AttributeSet, defStyleAttr: Int, defStyleRes: Int) {
@@ -164,14 +161,14 @@ class VKCustomClocksDelimiters @JvmOverloads constructor(
             )
             canvas.drawText(
                 hours.toString(),
-                point.x - (numberRect.width() / 2),
-                point.y + (numberRect.height() / 2),
+                point.x - (numberRect.width() * 0.5f),
+                point.y + (numberRect.height() * 0.5f),
                 paint
             )
-            if (hours == NUMBER_DELIMITERS_COUNT) {
-                hours = 1
+            hours = if (hours == NUMBER_DELIMITERS_COUNT) {
+                1
             } else {
-                hours++
+                hours + 1
             }
         }
     }

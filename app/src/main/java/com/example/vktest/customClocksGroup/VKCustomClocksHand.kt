@@ -33,22 +33,14 @@ class VKCustomClocksHand @JvmOverloads constructor(
         }
     var handLength = VKCustomClocksViewGroup.NOT_INITIALIZED
         set(value) {
-            field = if (value in 1..100) {
-                value
-            } else {
-                Math.min(Math.max(value, 1), 100)
-            }
+            field = value.coerceIn(1..100)
             findHandPoints()
             invalidate()
 
         }
     var handWidth = VKCustomClocksViewGroup.NOT_INITIALIZED
         set(value) {
-            field = if (value in 1..100) {
-                value
-            } else {
-                Math.min(Math.max(value, 1), 100)
-            }
+            field = value.coerceIn(1..100)
             val realWidth = field.toFloat() / HUNDRED_PERCENT * maxStrokeWidth
             paint.strokeWidth =
                 realWidth
@@ -83,7 +75,11 @@ class VKCustomClocksHand @JvmOverloads constructor(
     private var degreesPerStep = VKCustomClocksViewGroup.NOT_INITIALIZED_FLOAT
 
     init {
-        initAttributes(attrs!!, defStyleAttr, 0)
+        if(attrs != null){
+            initAttributes(attrs, defStyleAttr, 0)
+        } else{
+            throw Exception("Hand type is missing")
+        }
     }
 
     private fun initAttributes(attributeSet: AttributeSet, defStyleAttr: Int, defStyleRes: Int) {

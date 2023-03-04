@@ -30,7 +30,7 @@ abstract class VKCustomClocksElement @JvmOverloads constructor(
 
         val safeWidth = w - paddingLeft - paddingRight
         val safeHeight = h - paddingTop - paddingBottom
-        val safeRadius = Math.min(safeHeight, safeWidth) / 2f
+        val safeRadius = Math.min(safeHeight, safeWidth) * 0.5f
 
         radius = safeRadius
         center.x = paddingLeft + safeWidth / 2f
