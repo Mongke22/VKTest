@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">VKTest</string>
+    <string name="text_for_seconds">Секундная:</string>
+    <string name="text_for_minutes">Минутная:</string>
+    <string name="text_for_hours">Часовая:</string>
+    <string name="handLengthString">Длина стрелок:</string>
+    <string name="handWidthString">Ширина стрелок:</string>
+    <string name="elementsSizeString">Размеры других элементов:</string>
+    <string name="textSizeString">Шрифт цифр</string>
+    <string name="textWidthString">Толщина цифр</string>
+    <string name="pointsWidthString">Размер делений</string>
+    <string name="circleWidthString">Размер рамки часов</string>
+    <string name="handColorsString">Цвета стрелок:</string>
+    <string name="elementsColorString">Цвета других элементов:</string>
+    <string name="numbersString">Цифры:</string>
+    <string name="pointsString">Точки:</string>
+    <string name="circleString">Окружность:</string>
 </resources>

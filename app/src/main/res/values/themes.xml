@@ -17,27 +17,27 @@
 
     <style name="DefaultVKClocksGroupStyle">
         <item name="secondsHandColor">@color/black</item>
-        <item name="secondsHandWidth">20</item>
-        <item name="secondsHandLength">80</item>
+        <item name="secondsHandWidth">@integer/defaultSecondsHandWidth</item>
+        <item name="secondsHandLength">@integer/defaultSecondsHandLength</item>
 
         <item name="minutesHandColor">@color/black</item>
-        <item name="minutesHandWidth">30</item>
-        <item name="minutesHandLength">40</item>
+        <item name="minutesHandWidth">@integer/defaultMinutesHandWidth</item>
+        <item name="minutesHandLength">@integer/defaultMinutesHandLength</item>
 
         <item name="hoursHandColor">@color/black</item>
-        <item name="hoursHandWidth">40</item>
-        <item name="hoursHandLength">20</item>
+        <item name="hoursHandWidth">@integer/defaultHoursHandWidth</item>
+        <item name="hoursHandLength">@integer/defaultHoursHandLength</item>
 
         <item name="delimitersColor">@color/black</item>
-        <item name="delimitersSize">20</item>
+        <item name="delimitersSize">@integer/defaultDelimiterSize</item>
 
         <item name="numbersColor">@color/black</item>
-        <item name="numbersSize">70</item>
-        <item name="numbersWidth">30</item>
+        <item name="numbersSize">@integer/defaultNumberSize</item>
+        <item name="numbersWidth">@integer/defaultNumberWidth</item>
 
         <item name="circlesBackgroundColor">@color/lightGrey</item>
         <item name="circlesColor">@color/black</item>
-        <item name="circlesSize">30</item>
+        <item name="circlesSize">@integer/defaultCircleSize</item>
     </style>
     <style name="ColoredClocksGroupHands" parent="DefaultVKClocksGroupStyle">
         <item name="secondsHandColor">@color/red</item>
