@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:parentTag="android.widget.FrameLayout">
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.example.vktest.customClocksGroup.VKCustomClocksCircle
+            android:id="@+id/mainCircle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+        <com.example.vktest.customClocksGroup.VKCustomClocksDelimiters
+            android:id="@+id/numberDelimiters"
+            app:delimiterType="numbers"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+        <com.example.vktest.customClocksGroup.VKCustomClocksDelimiters
+            android:id="@+id/pointDelimiters"
+            app:delimiterType="points"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+        <com.example.vktest.customClocksGroup.VKCustomClocksHand
+            android:id="@+id/secondsHand"
+            app:handType="seconds"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+        <com.example.vktest.customClocksGroup.VKCustomClocksHand
+            android:id="@+id/minutesHand"
+            app:handType="minutes"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+        <com.example.vktest.customClocksGroup.VKCustomClocksHand
+            android:id="@+id/hoursHand"
+            app:handType="hours"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+    </FrameLayout>
+</merge>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <item name="defaultSecondsHandWidth" type="integer">20</item>
+    <item name="defaultSecondsHandLength" type="integer">80</item>
+
+    <item name="defaultMinutesHandWidth" type="integer">30</item>
+    <item name="defaultMinutesHandLength" type="integer">40</item>
+
+    <item name="defaultHoursHandWidth" type="integer">40</item>
+    <item name="defaultHoursHandLength" type="integer">20</item>
+
+    <item name="defaultNumberWidth" type="integer">30</item>
+    <item name="defaultNumberSize" type="integer">70</item>
+
+    <item name="defaultDelimiterSize" type="integer">20</item>
+    <item name="defaultCircleSize" type="integer">30</item>
+
+    <dimen name="standardColorSquareSize">30dp</dimen>
+    <dimen name="standardMarginPadding">10dp</dimen>
+</resources>

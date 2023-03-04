@@ -6,52 +6,55 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <com.example.vktest.customClocksGroup.VKCustomClocksViewGroup
+        android:id="@+id/vkTestClocks"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        app:hoursHandWidth="60"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:minutesHandLength="90"
+        app:secondsHandColor="@color/black"
+        />
+
+    <SeekBar
+        android:id="@+id/clocksSizeChanger"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:max="300"
+        android:progress="300"
+        android:rotation="270"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/vkTestClocks"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/clocksSizeChanger">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <com.example.vktest.VKCustomClocksView
-                android:id="@+id/vkTestClocks"
-                android:layout_width="300dp"
-                android:layout_height="300dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <SeekBar
-                android:id="@+id/clocksSizeChanger"
-                android:layout_width="300dp"
-                android:layout_height="300dp"
-                android:max="300"
-                android:progress="300"
-                android:rotation="270"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/vkTestClocks"
-                app:layout_constraintTop_toTopOf="parent" />
-
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
+                android:layout_marginStart="@dimen/standardMarginPadding"
+                android:layout_marginEnd="@dimen/standardMarginPadding"
                 android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/clocksSizeChanger">
+                app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:text="Длина стрелок:" />
+                    android:text="@string/handLengthString" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -59,68 +62,56 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:text="Секундная" />
+                        style="@style/standardTextViewLeftSide"
+                        android:text="@string/text_for_seconds" />
 
                     <SeekBar
                         android:id="@+id/secondHandLengthChanger"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="8"
-                        android:max="100"
-                        android:progress="80" />
+                        style="@style/standardSeekBar"
+                        android:progress="@integer/defaultSecondsHandLength"
+                        />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="@dimen/standardMarginPadding"
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:text="Минутная" />
+                        style="@style/standardTextViewLeftSide"
+                        android:text="@string/text_for_minutes" />
 
                     <SeekBar
                         android:id="@+id/minuteHandLengthChanger"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="8"
-                        android:max="100"
-                        android:progress="40" />
+                        style="@style/standardSeekBar"
+                        android:progress="@integer/defaultMinutesHandLength"
+                        />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="@dimen/standardMarginPadding"
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:text="Часовая" />
+                        style="@style/standardTextViewLeftSide"
+                        android:text="@string/text_for_hours" />
 
                     <SeekBar
                         android:id="@+id/hourHandLengthChanger"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="8"
-                        android:max="100"
-                        android:progress="20" />
+                        style="@style/standardSeekBar"
+                        android:progress="@integer/defaultHoursHandLength"
+                        />
                 </LinearLayout>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="10dp"
-                    android:text="Размеры других элементов:" />
+                    android:layout_marginTop="@dimen/standardMarginPadding"
+                    android:text="@string/handWidthString" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -128,89 +119,130 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:text="Шрифт цифр" />
+                        style="@style/standardTextViewLeftSide"
+                        android:text="@string/text_for_seconds" />
+
+                    <SeekBar
+                        android:id="@+id/secondHandWidthChanger"
+                        style="@style/standardSeekBar"
+                        android:progress="@integer/defaultSecondsHandWidth"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/standardMarginPadding"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/standardTextViewLeftSide"
+                        android:text="@string/text_for_minutes" />
+
+                    <SeekBar
+                        android:id="@+id/minuteHandWidthChanger"
+                        style="@style/standardSeekBar"
+                        android:progress="@integer/defaultMinutesHandWidth"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/standardMarginPadding"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/standardTextViewLeftSide"
+                        android:text="@string/text_for_hours" />
+
+                    <SeekBar
+                        android:id="@+id/hourHandWidthChanger"
+                        style="@style/standardSeekBar"
+                        android:progress="@integer/defaultHoursHandWidth"
+                        />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/standardMarginPadding"
+                    android:text="@string/elementsSizeString" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/standardTextViewLeftSide"
+                        android:text="@string/textSizeString" />
 
                     <SeekBar
                         android:id="@+id/numberSizeChanger"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="8"
-                        android:max="100"
-                        android:progress="30" />
+                        style="@style/standardSeekBar"
+                        android:progress="@integer/defaultNumberSize"
+                        />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="@dimen/standardMarginPadding"
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:text="Толщина цифр" />
+                        style="@style/standardTextViewLeftSide"
+                        android:text="@string/textWidthString" />
 
                     <SeekBar
                         android:id="@+id/numberWidthChanger"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="8"
-                        android:max="100"
-                        android:progress="30" />
+                        style="@style/standardSeekBar"
+                        android:progress="@integer/defaultNumberWidth"
+                        />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="@dimen/standardMarginPadding"
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:text="Размер делений" />
+                        style="@style/standardTextViewLeftSide"
+                        android:text="@string/pointsWidthString" />
 
                     <SeekBar
                         android:id="@+id/delimiterWidthChanger"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="8"
-                        android:max="100"
-                        android:progress="20" />
+                        style="@style/standardSeekBar"
+                        android:progress="@integer/defaultDelimiterSize"
+                        />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="@dimen/standardMarginPadding"
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:text="Размер рамки часов" />
+                        style="@style/standardTextViewLeftSide"
+                        android:text="@string/circleWidthString" />
 
                     <SeekBar
                         android:id="@+id/circleWidthChanger"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="8"
-                        android:max="100"
-                        android:progress="12" />
+                        style="@style/standardSeekBar"
+                        android:progress="@integer/defaultCircleSize"
+                        />
                 </LinearLayout>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="10dp"
-                    android:text="Цвета стрелок:" />
+                    android:layout_marginTop="@dimen/standardMarginPadding"
+                    android:text="@string/handColorsString" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -227,12 +259,12 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="секундная:" />
+                            android:text="@string/text_for_seconds" />
 
                         <ImageView
                             android:id="@+id/secondColorChanger"
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
+                            android:layout_width="@dimen/standardColorSquareSize"
+                            android:layout_height="@dimen/standardColorSquareSize"
                             android:background="@color/green" />
                     </LinearLayout>
 
@@ -246,12 +278,12 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="минутная:" />
+                            android:text="@string/text_for_minutes" />
 
                         <ImageView
                             android:id="@+id/minuteColorChanger"
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
+                            android:layout_width="@dimen/standardColorSquareSize"
+                            android:layout_height="@dimen/standardColorSquareSize"
                             android:background="@color/green" />
                     </LinearLayout>
 
@@ -265,13 +297,86 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="часовая:" />
+                            android:text="@string/text_for_hours"
+                            />
 
                         <ImageView
                             android:id="@+id/hourColorChanger"
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
+                            android:layout_width="@dimen/standardColorSquareSize"
+                            android:layout_height="@dimen/standardColorSquareSize"
                             android:background="@color/green" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/standardMarginPadding"
+                    android:text="@string/elementsColorString" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="@dimen/standardMarginPadding"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/numbersString" />
+
+                        <ImageView
+                            android:id="@+id/numberColorChanger"
+                            android:layout_width="@dimen/standardColorSquareSize"
+                            android:layout_height="@dimen/standardColorSquareSize"
+                            android:background="@color/black" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/pointsString" />
+
+                        <ImageView
+                            android:id="@+id/pointsColorChanger"
+                            android:layout_width="@dimen/standardColorSquareSize"
+                            android:layout_height="@dimen/standardColorSquareSize"
+                            android:background="@color/black" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/circleString" />
+
+                        <ImageView
+                            android:id="@+id/circleColorChanger"
+                            android:layout_width="@dimen/standardColorSquareSize"
+                            android:layout_height="@dimen/standardColorSquareSize"
+                            android:background="@color/black" />
                     </LinearLayout>
 
                 </LinearLayout>
