@@ -4,13 +4,13 @@ import android.content.Context
 import android.graphics.Color
 import android.os.Handler
 import android.os.Looper
+import android.os.Parcel
 import android.os.Parcelable
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.vktest.CurrentTimePicker
 import com.example.vktest.R
-import com.example.vktest.customClocksSingleView.VKCustomClocksView
 import com.example.vktest.databinding.VkCustomClocksViewGroupBinding
 import kotlin.concurrent.thread
 
@@ -281,7 +281,7 @@ class VKCustomClocksViewGroup(
 
     override fun onSaveInstanceState(): Parcelable? {
         val superState = super.onSaveInstanceState()!!
-        val savedState = VKCustomClocksView.SavedState(superState)
+        val savedState = VKCustomClocksViewGroup.SavedState(superState)
         savedState.secondHandColor = secondHandColor
         savedState.secondHandWidth = secondHandWidth
         savedState.secondHandLength = secondHandLength
@@ -303,7 +303,7 @@ class VKCustomClocksViewGroup(
     }
 
     override fun onRestoreInstanceState(state: Parcelable?) {
-        val savedState = state as VKCustomClocksView.SavedState
+        val savedState = state as VKCustomClocksViewGroup.SavedState
         super.onRestoreInstanceState(savedState.superState)
         secondHandColor = savedState.secondHandColor
         secondHandWidth = savedState.secondHandWidth
@@ -323,7 +323,85 @@ class VKCustomClocksViewGroup(
         circleColor = savedState.circleColor
         circleWidth = savedState.circleWidth
     }
+    class SavedState : BaseSavedState {
+        var secondHandColor: Int = VKCustomClocksViewGroup.NOT_INITIALIZED
+        var secondHandWidth: Int = VKCustomClocksViewGroup.NOT_INITIALIZED
+        var secondHandLength: Int = VKCustomClocksViewGroup.NOT_INITIALIZED
+        var minuteHandColor: Int = VKCustomClocksViewGroup.NOT_INITIALIZED
+        var minuteHandWidth: Int = VKCustomClocksViewGroup.NOT_INITIALIZED
+        var minuteHandLength: Int = VKCustomClocksViewGroup.NOT_INITIALIZED
+        var hourHandColor: Int = VKCustomClocksViewGroup.NOT_INITIALIZED
+        var hourHandWidth: Int = VKCustomClocksViewGroup.NOT_INITIALIZED
+        var hourHandLength: Int = VKCustomClocksViewGroup.NOT_INITIALIZED
+        var delimiterColor: Int = VKCustomClocksViewGroup.NOT_INITIALIZED
+        var delimiterWidth: Int = VKCustomClocksViewGroup.NOT_INITIALIZED
+        var numberColor: Int = VKCustomClocksViewGroup.NOT_INITIALIZED
+        var numberWidth: Int = VKCustomClocksViewGroup.NOT_INITIALIZED
+        var numberSize: Int = VKCustomClocksViewGroup.NOT_INITIALIZED
+        var circleBackgroundColor: Int = VKCustomClocksViewGroup.NOT_INITIALIZED
+        var circleColor: Int = VKCustomClocksViewGroup.NOT_INITIALIZED
+        var circleWidth: Int = VKCustomClocksViewGroup.NOT_INITIALIZED
 
+        constructor(superState: Parcelable) : super(superState)
+        constructor(parcel: Parcel) : super(parcel) {
+            secondHandColor = parcel.readInt()
+            secondHandWidth = parcel.readInt()
+            secondHandLength = parcel.readInt()
+            minuteHandColor = parcel.readInt()
+            minuteHandWidth = parcel.readInt()
+            minuteHandLength = parcel.readInt()
+            hourHandColor = parcel.readInt()
+            hourHandWidth = parcel.readInt()
+            hourHandLength = parcel.readInt()
+            delimiterColor = parcel.readInt()
+            delimiterWidth = parcel.readInt()
+            numberColor = parcel.readInt()
+            numberWidth = parcel.readInt()
+            numberSize = parcel.readInt()
+            circleBackgroundColor = parcel.readInt()
+            circleColor = parcel.readInt()
+            circleWidth = parcel.readInt()
+        }
+
+        override fun writeToParcel(out: Parcel, flags: Int) {
+            super.writeToParcel(out, flags)
+            out.apply {
+                writeInt(secondHandColor)
+                writeInt(secondHandWidth)
+                writeInt(secondHandLength)
+                writeInt(minuteHandColor)
+                writeInt(minuteHandWidth)
+                writeInt(minuteHandLength)
+                writeInt(hourHandColor)
+                writeInt(hourHandWidth)
+                writeInt(hourHandLength)
+                writeInt(delimiterColor)
+                writeInt(delimiterWidth)
+                writeInt(numberColor)
+                writeInt(numberWidth)
+                writeInt(numberSize)
+                writeInt(circleBackgroundColor)
+                writeInt(circleColor)
+                writeInt(circleWidth)
+            }
+
+        }
+
+        companion object {
+            @JvmField
+            val CREATOR: Parcelable.Creator<SavedState> = object : Parcelable.Creator<SavedState> {
+                override fun createFromParcel(source: Parcel): SavedState {
+                    return SavedState(source)
+                }
+
+                override fun newArray(size: Int): Array<SavedState?> {
+                    return Array(size) { null }
+                }
+
+            }
+        }
+
+    }
     companion object {
 
         const val DEFAULT_COLOR = Color.BLACK

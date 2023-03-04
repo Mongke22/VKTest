@@ -7,7 +7,6 @@ import android.widget.SeekBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.vktest.customClocksGroup.VKCustomClocksViewGroup
-import com.example.vktest.customClocksSingleView.VKCustomClocksView
 import com.example.vktest.databinding.ActivityMainBinding
 import com.jaredrummler.android.colorpicker.ColorPickerDialog
 import com.jaredrummler.android.colorpicker.ColorPickerDialogListener

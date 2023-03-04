@@ -1,30 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-     <declare-styleable name="VKCustomClocksView">
-          <attr name="secondHandColor" format="color"/>
-          <attr name="secondHandWidth" format="integer"/>
-          <attr name="secondHandLength" format="integer"/>
-
-          <attr name="minuteHandColor" format="color"/>
-          <attr name="minuteHandWidth" format="integer"/>
-          <attr name="minuteHandLength" format="integer"/>
-
-          <attr name="hourHandColor" format="color"/>
-          <attr name="hourHandWidth" format="integer"/>
-          <attr name="hourHandLength" format="integer"/>
-
-          <attr name="delimiterColor" format="color"/>
-          <attr name="delimiterSize" format="integer"/>
-
-          <attr name="numberColor" format="color"/>
-          <attr name="numberSize" format="integer"/>
-          <attr name="numberWidth" format="integer"/>
-
-          <attr name="circleBackgroundColor" format="color"/>
-          <attr name="circleColor" format="color"/>
-          <attr name="circleSize" format="integer"/>
-     </declare-styleable>
-
      <declare-styleable name="VKCustomClocksViewGroup">
           <attr name="secondsHandColor" format="color"/>
           <attr name="secondsHandWidth" format="integer"/>
