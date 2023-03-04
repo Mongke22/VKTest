@@ -25,6 +25,51 @@ class MainActivity : AppCompatActivity(), ColorPickerDialogListener {
         binding.minuteColorChanger.setBackgroundColor(binding.vkTestClocks.minuteHandColor)
         binding.hourColorChanger.setBackgroundColor(binding.vkTestClocks.hourHandColor)
 
+        setUpSeekBarListeners()
+        setUpColorChangeListeners()
+
+
+    }
+
+
+
+    override fun onColorSelected(dialogId: Int, color: Int) {
+        when(dialogId){
+            SECOND_COLOR_DIALOG_ID -> {
+                binding.secondColorChanger.setBackgroundColor(color)
+                binding.vkTestClocks.secondHandColor = color
+            }
+            MINUTE_COLOR_DIALOG_ID -> {
+                binding.minuteColorChanger.setBackgroundColor(color)
+                binding.vkTestClocks.minuteHandColor = color
+            }
+            HOUR_COLOR_DIALOG_ID -> {
+                binding.hourColorChanger.setBackgroundColor(color)
+                binding.vkTestClocks.hourHandColor = color
+            }
+
+            NUMBER_COLOR_DIALOG_ID -> {
+                binding.numberColorChanger.setBackgroundColor(color)
+                binding.vkTestClocks.numberColor = color
+            }
+            POINTS_COLOR_DIALOG_ID -> {
+                binding.pointsColorChanger.setBackgroundColor(color)
+                binding.vkTestClocks.delimiterColor = color
+            }
+            CIRCLE_COLOR_DIALOG_ID -> {
+                binding.circleColorChanger.setBackgroundColor(color)
+                binding.vkTestClocks.circleColor = color
+            }
+            else -> {
+                throw Exception("Wrong color dialog id")
+            }
+        }
+    }
+
+    override fun onDialogDismissed(dialogId: Int) {
+    }
+
+    private fun setUpSeekBarListeners(){
         binding.secondHandLengthChanger.setOnSeekBarChangeListener(object: SeekBar.OnSeekBarChangeListener{
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                 binding.vkTestClocks.secondHandLength = progress
@@ -160,7 +205,8 @@ class MainActivity : AppCompatActivity(), ColorPickerDialogListener {
             }
 
         })
-
+    }
+    private fun setUpColorChangeListeners() {
         binding.secondColorChanger.setOnClickListener {
             ColorPickerDialog.newBuilder()
                 .setDialogType(ColorPickerDialog.TYPE_CUSTOM)
@@ -223,45 +269,7 @@ class MainActivity : AppCompatActivity(), ColorPickerDialogListener {
                 clocks.minuteHandColor = Color.RED
             else clocks.minuteHandColor = Color.GREEN
         }
-
     }
-
-    override fun onColorSelected(dialogId: Int, color: Int) {
-        when(dialogId){
-            SECOND_COLOR_DIALOG_ID -> {
-                binding.secondColorChanger.setBackgroundColor(color)
-                binding.vkTestClocks.secondHandColor = color
-            }
-            MINUTE_COLOR_DIALOG_ID -> {
-                binding.minuteColorChanger.setBackgroundColor(color)
-                binding.vkTestClocks.minuteHandColor = color
-            }
-            HOUR_COLOR_DIALOG_ID -> {
-                binding.hourColorChanger.setBackgroundColor(color)
-                binding.vkTestClocks.hourHandColor = color
-            }
-
-            NUMBER_COLOR_DIALOG_ID -> {
-                binding.numberColorChanger.setBackgroundColor(color)
-                binding.vkTestClocks.numberColor = color
-            }
-            POINTS_COLOR_DIALOG_ID -> {
-                binding.pointsColorChanger.setBackgroundColor(color)
-                binding.vkTestClocks.delimiterColor = color
-            }
-            CIRCLE_COLOR_DIALOG_ID -> {
-                binding.circleColorChanger.setBackgroundColor(color)
-                binding.vkTestClocks.circleColor = color
-            }
-            else -> {
-                throw Exception("Wrong color dialog id")
-            }
-        }
-    }
-
-    override fun onDialogDismissed(dialogId: Int) {
-    }
-
     companion object{
         const val SECOND_COLOR_DIALOG_ID = 0
         const val MINUTE_COLOR_DIALOG_ID = 1
