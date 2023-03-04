@@ -436,7 +436,7 @@ class VKCustomClocksView(
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
         if (canvas == null) {
-            throw Exception("Canvas in sull")
+            throw Exception("Canvas in null")
         }
         drawMainCircle(canvas)
         drawDelimiters(canvas)

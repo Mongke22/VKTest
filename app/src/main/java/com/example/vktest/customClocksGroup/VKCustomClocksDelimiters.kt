@@ -57,10 +57,9 @@ class VKCustomClocksDelimiters @JvmOverloads constructor(
         }
 
     init {
-        if(attrs != null){
+        if (attrs != null) {
             initAttributes(attrs, defStyleAttr, 0)
-        }
-        else {
+        } else {
             throw Exception("Delimiter type is missing")
         }
     }

@@ -278,6 +278,7 @@ class VKCustomClocksViewGroup(
             }
         }
     }
+
     override fun onSaveInstanceState(): Parcelable? {
         val superState = super.onSaveInstanceState()!!
         val savedState = VKCustomClocksView.SavedState(superState)

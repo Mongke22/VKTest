@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.SeekBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
+import com.example.vktest.customClocksGroup.VKCustomClocksViewGroup
 import com.example.vktest.customClocksSingleView.VKCustomClocksView
 import com.example.vktest.databinding.ActivityMainBinding
 import com.jaredrummler.android.colorpicker.ColorPickerDialog
@@ -217,7 +218,7 @@ class MainActivity : AppCompatActivity(), ColorPickerDialogListener {
         }
 
         binding.vkTestClocks.setOnClickListener {
-            val clocks = it as VKCustomClocksView
+            val clocks = it as VKCustomClocksViewGroup
             if(clocks.minuteHandColor != Color.RED)
                 clocks.minuteHandColor = Color.RED
             else clocks.minuteHandColor = Color.GREEN

@@ -75,9 +75,9 @@ class VKCustomClocksHand @JvmOverloads constructor(
     private var degreesPerStep = VKCustomClocksViewGroup.NOT_INITIALIZED_FLOAT
 
     init {
-        if(attrs != null){
+        if (attrs != null) {
             initAttributes(attrs, defStyleAttr, 0)
-        } else{
+        } else {
             throw Exception("Hand type is missing")
         }
     }
